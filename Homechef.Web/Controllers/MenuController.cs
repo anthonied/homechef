@@ -1,29 +1,26 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using Homechef.Domain;
 using Homechef.Repository.MsSql;
 using Homechef.Web.Models;
+using System.Web.Mvc;
+
 
 namespace Homechef.Web.Controllers
 {
-    public class ChefController : BaseController
+    public class MenuController:BaseController
     {
-        // GET: Chef
-        public ActionResult Registration()
+        public JsonResult Create (MenuModel model )
         {
-            return View();
-        }
-        public JsonResult Create(ChefModel model)
-        {
-            var repo = new ChefRepository();
+            var repo = new MenuRepository();
             repo.Create(model.ToDomain());
             return new JsonResult
             {
                 Data = new { IsOk = true }
             };
+
         }
     }
 }

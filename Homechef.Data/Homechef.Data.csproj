@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chef_data.cs" />
+    <Compile Include="Menu_data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User_data.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Homechef.Domain\Homechef.Domain.csproj">

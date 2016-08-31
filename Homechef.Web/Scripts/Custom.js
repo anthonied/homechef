@@ -60,7 +60,7 @@ changeDivSizeToFitOnScreen = function (elementName, minusHeight) {
 
 
 sendViewModelToController = function (url, data, successFunction) {
-    alert(url);
+  
     console.log(getLocation(url, true));
    return $.ajax({
         url: getLocation(url,true),

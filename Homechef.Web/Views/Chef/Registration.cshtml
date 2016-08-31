@@ -15,24 +15,62 @@
             <input type="text" class="form-control" placeholder="Last Name" data-bind="value: lastname">
         </div>
         <div class="form-group">
+            <label>ID Number</label>
+            <input type="text" class="form-control" placeholder="ID Number" data-bind="value: idnumber">
+        </div>
+        <div class="form-group">
             <label>Age</label>
             <input type="text" class="form-control" placeholder="Age" data-bind="value: age">
         </div>
+       
         <div class="form-group">
-            <label>Email Address</label>
-            <input type="text" class="form-control" placeholder="Email Address" data-bind="value: email">
+            <label>Sex</label>
+            <input type="radio" name ="checkgender" value ="Female" data-bind="checked:sex " />Female
+            <input type="radio" name ="checkgender" value="Male" data-bind="checked:sex" />Male
         </div>
         <div class="form-group">
             <label>Mobile Number</label>
             <input type="text" class="form-control" placeholder="Mobile Number" data-bind="value: mobile">
         </div>
         <div class="form-group">
-            <label>Residential Address</label>
-            <input type="text" class="form-control" placeholder="Residential Address" data-bind="value: residentialaddress">
+            <label>Street Name</label>
+            <input type="text" class="form-control" placeholder="Street Name" data-bind="value: streetname">
         </div>
         <div class="form-group">
-            <label>ID Number</label>
-            <input type="text" class="form-control" placeholder="ID Number" data-bind="value: idnumber">
+            <label>Suburb</label>
+            <input type="text" class="form-control" placeholder="Suburb" data-bind="value: suburb">
+        </div>
+        <div class="form-group">
+            <label>City</label>
+            <input type="text" class="form-control" placeholder="City" data-bind="value: city">
+        </div>
+        <div class="form-group">
+            <label>Province</label>
+            <input type="text" class="form-control" placeholder="Province" data-bind="value: province">
+        </div>
+        <div class="form-group">
+            <label>postalcode</label>
+            <input type="text" class="form-control" placeholder="Postal Code" data-bind="value: postalcode">
+        </div>
+        <div class="form-group">
+            <label>Country</label>
+            <input type="text" class="form-control" placeholder="Country" data-bind="value: country">
+        </div>
+        <div class="form-group">
+            <label>Chef Picture</label>
+            <input type="text" class="form-control" placeholder="Chef Picture" data-bind="value: chefpicture">
+        </div>
+        <div class="form-group">
+            <label>Chef Description</label>
+            <input type="text" class="form-control" placeholder="Description" data-bind="value: description">
+        </div>
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="text" class="form-control" placeholder="Email Address" data-bind="value: email">
+        </div>
+        <div class="form-group">
+            <label>Password for your Account</label>
+            <input type="text" class="form-control" placeholder="Password" data-bind="value: password">
         </div>
         <button data-bind="click: submit" class="btn btn-default">Submit</button>
     </form>
@@ -41,24 +79,37 @@
 @section scripts
 {
     <script>
-        var chefRegistrationViewModel = function () {
+        var ChefRegistrationViewModel = function () {
             var self = this;
             self.firstname = ko.observable("");
-            self.lastname= ko.observable("");
-           self.age= ko.observable("");
-            self.email= ko.observable("");
-                 self.mobile= ko.observable("");
-                 self.residentialaddress= ko.observable("");
-                 self.idnumber = ko.observable("");
-                 self.submit = function () {
-                     sendViewModelToController("Chef/Create", ko.toJSON(self), function () {
-                         alert("Done");
-                     });
-                 }
-
-        }
-        ko.applyBindings(new chefRegistrationViewModel(),
-            document.getElementById(chefregistration));
+            self.lastname = ko.observable("");
+            self.idnumber = ko.observable("");
+            self.age = ko.observable("");
+            self.sex = ko.observable("");
+            self.mobile = ko.observable("");
+            self.streetname = ko.observable("");
+            self.suburb = ko.observable("");
+            self.city = ko.observable("");
+            self.province = ko.observable("");
+            self.postalcode = ko.observable("");
+            self.country = ko.observable("");
+            self.chefpicture = ko.observable("");
+            self.description = ko.observable("");
+            self.email = ko.observable("").extend({ email: true });
+            self.password = ko.observable("");
+            if(self.isValid()) {
+                alert("jkkk");
+                //self.submit = function () {
+                //    sendViewModelToController("Chef/Create", ko.toJSON(self), function () {
+                //        alert("Done");
+                //    });
+                //};
+            };
+            ko.applyBindings(new ChefRegistrationViewModel(),
+                document.getElementById(chefregistration));
+            }
+            
+               
     </script>
     
 }
