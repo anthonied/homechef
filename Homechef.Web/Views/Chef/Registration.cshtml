@@ -2,10 +2,17 @@
 @{
     ViewBag.Title = "Registration";
 }
-
+<style>
+    .validationMessage {
+    color: #f00;
+}
+.customMessage {
+    color: #FFA500;
+}
+</style>
 <h2>Chef Registration</h2>
 <div id="chefregistration">
-    <form>
+    <form onsubmit="return false">
         <div class="form-group">
             <label>First Name</label>
             <input type="text" class="form-control" placeholder="First Name" data-bind="value: firstname">
@@ -79,9 +86,22 @@
 @section scripts
 {
     <script>
-        var ChefRegistrationViewModel = function () {
+
+        ko.validation.init({
+                registerExtenders: true,
+                messagesOnModified: true,
+                insertMessages: true,
+                parseInputAttributes: true,
+                messageTemplate: null
+            },
+            true);
+
+        var ChefRegistrationViewModel = function() {
             var self = this;
-            self.firstname = ko.observable("");
+            self.firstname = ko.observable("")
+                .extend({ required: true });
+
+
             self.lastname = ko.observable("");
             self.idnumber = ko.observable("");
             self.age = ko.observable("");
@@ -95,22 +115,34 @@
             self.country = ko.observable("");
             self.chefpicture = ko.observable("");
             self.description = ko.observable("");
-            self.email = ko.observable("").extend({ email: true });
+            self.email = ko.observable("").extend({ required: true, email: true });
             self.password = ko.observable("");
-            if(self.isValid()) {
-                alert("jkkk");
-                //self.submit = function () {
-                //    sendViewModelToController("Chef/Create", ko.toJSON(self), function () {
-                //        alert("Done");
-                //    });
-                //};
+
+
+            self.submit = function() {
+                console.log(self.errors());
+                if (self.errors().length === 0) {
+//                    sendViewModelToController("Chef/Create",
+//                        ko.toJSON(self),
+//                        function() {
+//                            alert("Done");
+                    //                        });
+                    console.log("correct");
+                } else {
+                    console.log("not valid");
+                    self.errors.showAllMessages();
+                }
             };
-            ko.applyBindings(new ChefRegistrationViewModel(),
-                document.getElementById(chefregistration));
-            }
-            
-               
+
+
+        }
+
+        var viewModel = new ChefRegistrationViewModel();
+        viewModel.errors = ko.validation.group(viewModel);
+        ko.applyBindings(viewModel,
+            document.getElementById("chefregistration"));
+
     </script>
-    
+
 }
 
