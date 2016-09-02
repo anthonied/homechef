@@ -230,10 +230,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Chef\Registration.cshtml" />
-    <Content Include="Views\Chef\User.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Chef\AddMenu.cshtml" />
+    <Content Include="Views\Menu\Add.cshtml" />
     <Content Include="Scripts\knockout.validation.min.js.map" />
+    <Content Include="Views\Chef\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

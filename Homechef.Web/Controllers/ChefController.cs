@@ -1,9 +1,4 @@
-﻿using System;
-
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Homechef.Domain;
+﻿using System.Web.Mvc;
 using Homechef.Repository.MsSql;
 using Homechef.Web.Models;
 
@@ -11,11 +6,16 @@ namespace Homechef.Web.Controllers
 {
     public class ChefController : BaseController
     {
-        // GET: Chef
         public ActionResult Registration()
         {
             return View();
         }
+
+        public ActionResult Home()
+        {
+            return View();
+        }
+
         public JsonResult Create(ChefModel model)
         {
             var repo = new ChefRepository();

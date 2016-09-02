@@ -12,15 +12,21 @@ namespace Homechef.Web.Controllers
 {
     public class MenuController:BaseController
     {
+        public ActionResult Add()
+        {
+            return View();
+        }
+
         public JsonResult Create (MenuModel model )
         {
-            var repo = new MenuRepository();
-            repo.Create(model.ToDomain());
-            return new JsonResult
+            using (var repo = new MenuRepository())
             {
-                Data = new { IsOk = true }
-            };
-
+                repo.Create(model.ToDomain());
+                return new JsonResult
+                {
+                    Data = new {IsOk = true}
+                };
+            }
         }
     }
 }
