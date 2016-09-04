@@ -12,7 +12,7 @@ namespace Homechef.Data
         public string dishcategory { get; set; }
         public string cuisinetype { get; set; }
         public int pricepp { get; set; }
-        public int currency { get; set; }
+        public string currency { get; set; }
         public string description { get; set; }
         public string dishimage { get; set; }
         public string takeaway { get; set; }
@@ -21,7 +21,7 @@ namespace Homechef.Data
         public string availabilitytype { get; set; }
         public string availableonmonday { get; set; }
         public string availableontuesday { get; set; }
-        public string availableonwedday { get; set; }
+        public string availableonwednesday { get; set; }
         public string availableonthursday { get; set; }
         public string availableonfriday { get; set; }
         public string availableonsaturday { get; set; }
@@ -38,6 +38,7 @@ namespace Homechef.Data
               
                 chefid =menu.Chefid,
                 dishname =menu.Dishname,
+                dishcategory = menu.Dishcategory,
                 cuisinetype =menu.Cuisinetype,
                 pricepp =menu.Pricepp,
                 currency =menu.Currency,
@@ -49,7 +50,7 @@ namespace Homechef.Data
                 availabilitytype = menu.Availabilitytype,
                 availableonmonday = menu.Availableonmonday,
                 availableontuesday = menu.Availableontuesday,
-                availableonwedday = menu.Availableonwednesday,
+                availableonwednesday = menu.Availableonwednesday,
                 availableonthursday = menu.Availableonthursday,
                 availableonfriday = menu.Availableonfriday,
                 availableonsaturday = menu.Availableonsaturday,

@@ -10,7 +10,8 @@ namespace Homechef.Repository.MsSql
     {
         public void Create(Menu menu)
         {
-            var sql = @"";
+            var sql = @"INSERT INTO menu(dishname,dishcategory,cuisinetype,pricepp,currency,description,dishimage,takeaway,dineinwithchef,homedelivery,availabilitytype,availableonmonday,availableontuesday,availableonwednesday,availableonthursday,availableonfriday,availableonsaturday,availableonsunday,orderminimum,ordermaximum,leadtime)
+                        VALUES(@dishname,@dishcategory,@cuisinetype,@pricepp,@currency,@description,@dishimage,@takeaway,@dineinwithchef,@homedelivery,@availabilitytype,@availableonmonday,@availableontuesday,@availableonwednesday,@availableonwednesday,@availableonfriday,@availableonsaturday,@availableonsunday,@orderminimum,@ordermaximum,@leadtime)";
             var data = Menu_data.FromDomain(menu);
             _db.Execute(sql, data);
         }

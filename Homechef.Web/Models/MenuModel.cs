@@ -11,7 +11,7 @@ namespace Homechef.Web.Models
         public string Cuisinetype { get; set; }
         public string Dishcategory { get; set; }
         public int Pricepp { get; set; }
-        public int Currency { get; set; }
+        public string Currency { get; set; }
         public string Description { get; set; }
         public string Dishimage { get; set; }
         public string Takeaway { get; set; }

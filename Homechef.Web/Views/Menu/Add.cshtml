@@ -12,20 +12,14 @@
         <div class="form-group">
             <label>Dish Category</label>
             <select data-bind="options: availableDishCategories,
-                   value: selectedDishCategory,
+                   value: dishcategory,
                    optionsCaption: 'Choose category...'"></select>
          
         </div>
         <div class="form-group">
             <label>Select Cuisine</label>
-            <select>
-                <option value="Africian">African Cusine</option>
-                <option value="Chinese">Chinese</option>
-                <option value="French">French</option>
-                <option value="Mexican">Mexican</option>
-                <option value="Italian">Italian</option>
-                <option value="Indian">Indian</option>
-                <option value="Others">Others</option>
+            <select data-bind ="options: availableCuisine,value:cuisinetype, optionsCaption: 'Choose Cuisine...'">
+              
 
             </select>
         </div>
@@ -38,64 +32,64 @@
             <input type="text" class="form-control" placeholder="Currency" data-bind="value: currency">
         </div>
         <div class="form-group">
-            <label>Description about your menu</label>
-            <input type="text" class="form-control" placeholder="Description about your menu" data-bind="value: description">
-        </div>
-        <div class="form-group">
-            <label>Dish Image</label>
-            <input type="text" class="form-control" placeholder="Dish Image" data-bind="value: dishimage">
-        </div>
-        <div class="form-group">
-            <label>Choose which delivery options you can provide</label>
-        </div>
-        <div class="form-group">
-            <label><input type="checkbox" value="Take Away">Take Away</label>
+        <label>Description about your menu</label>
+        <input type="text" class="form-control" placeholder="Description about your menu" data-bind="value: description">
+    </div>
+    <div class="form-group">
+        <label>Dish Image</label>
+        <input type="text" class="form-control" placeholder="Dish Image" data-bind="value: dishimage">
+    </div>
+    <div class="form-group">
+        <label>Choose which delivery options you can provide</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox"  data-bind="checked: takeaway ">Take Away</label>
 
-            <label><input type="checkbox" value="Dine in with chef">Dine in with chef</label>
+        <label><input type="checkbox" data-bind="checked: dineinwithchef ">Dine in with chef</label>
 
-            <label><input type="checkbox" value="Home Delivery" >Home Delivery</label>
-        </div>
-        <div class="form-group">
-            <label>Availability of your Dish</label>
-        </div>
-        <div class="form-group">
-            <input type="radio" name="availability" value="On Request" data-bind="checked:availability " />On Request
-            <input type="radio" name="availability" value="Any Day" data-bind="checked:availability" />Any Day
-        </div>
-        
-        <div class="form-group">
-            <label>Available Days</label>
-        </div>
-        <div class="form-group">
-            <label><input type="checkbox" value="Monday">Monday</label>
+        <label><input type="checkbox" data-bind="checked: homedelivery " >Home Delivery</label>
+    </div>
+    <div class="form-group">
+        <label>Availability of your Dish</label>
+    </div>
+    <div class="form-group">
+        <input type="radio" name="availability" value="On Request" data-bind="checked:availabilitytype " />On Request
+        <input type="radio" name="availability" value="Any Day" data-bind="checked:availabilitytype" />Any Day
+    </div>
 
-            <label><input type="checkbox" value="Tuesday">Tuesday</label>
+    <div class="form-group">
+        <label>Available Days</label>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" data-bind="checked: availableonmonday ">Monday</label>
 
-            <label><input type="checkbox" value="Wednesday" >Wednesday</label>
+        <label><input type="checkbox" data-bind="checked: availableontuesday ">Tuesday</label>
 
-            <label><input type="checkbox" value="Thursday">Thursday</label>
+        <label><input type="checkbox" data-bind="checked: availableonwednesday " >Wednesday</label>
 
-            <label><input type="checkbox" value="Friday">Friday</label>
+        <label><input type="checkbox" data-bind="checked: availableonthursday ">Thursday</label>
 
-            <label><input type="checkbox" value="Saturday" >Saturday</label>
+        <label><input type="checkbox" data-bind="checked: availableonfriday ">Friday</label>
 
-            <label><input type="checkbox" value="Sunday">Sunday</label>
+        <label><input type="checkbox" data-bind="checked: availableonsaturday " >Saturday</label>
 
-        </div>
-        
-        <div class="form-group">
-            <label>Minimum Order</label>
-            <input type="text" class="form-control" placeholder="Minimum Order" data-bind="value: orderminimum">
-        </div>
-        <div class="form-group">
-            <label>Minimum Maximum</label>
-            <input type="text" class="form-control" placeholder="Maximum Order" data-bind="value: ordermaximum">
-        </div>
-        
-        <div class="form-group">
-            <label>Order Before (In Hours)</label>
-            <input type="text" class="form-control" placeholder="Order Before" data-bind="value: leadtime">
-        </div>
+        <label><input type="checkbox" data-bind="checked: availableonsunday ">Sunday</label>
+
+    </div>
+
+    <div class="form-group">
+        <label>Minimum Order</label>
+        <input type="text" class="form-control" placeholder="Minimum Order" data-bind="value: orderminimum">
+    </div>
+    <div class="form-group">
+        <label>Maximum Order</label>
+        <input type="text" class="form-control" placeholder="Maximum Order" data-bind="value: ordermaximum">
+    </div>
+
+    <div class="form-group">
+        <label>Order Before (In Hours)</label>
+        <input type="text" class="form-control" placeholder="Order Before" data-bind="value: leadtime">
+    </div>
         <button data-bind="click: submit" class="btn btn-default">Submit</button>
     </form>
     
@@ -109,10 +103,32 @@
              var self = this;
              self.dishname = ko.observable("");
              self.availableDishCategories = ["Home Food","Sweets,Cakes,Cookies","Party Order","Others"];
-             self.selectedDishCategory = ko.observable();
+             self.dishcategory = ko.observable("");
+             self.availableCuisine = ["African Cusine", "Chinese", "French", "Mexican", "Italian", "Indian", "Others"];
+             self.cuisinetype = ko.observable("");
+             self.pricepp = ko.observable("");
+             self.currency = ko.observable("");
+             self.description = ko.observable("");
+             self.dishimage = ko.observable("");
+             self.takeaway = ko.observable("");
+             self.dineinwithchef = ko.observable("");
+             self.homedelivery = ko.observable("");
+             self.availabilitytype = ko.observable("");
+             self.availableonmonday = ko.observable("");
+             self.availableontuesday = ko.observable("");
+             self.availableonwednesday = ko.observable("");
+             self.availableonthursday = ko.observable("");
+             self.availableonfriday = ko.observable("");
+             self.availableonsaturday = ko.observable("");
+             self.availableonsunday = ko.observable("");
+             self.orderminimum = ko.observable("");
+             self.ordermaximum = ko.observable("");
+             self.leadtime = ko.observable("");
+
+
              self.submit = function () {
                  console.log(self.selectedDishCategory);
-                 //sendViewModelToController("Menu/Create", ko.toJSON(self), function() { alert("Done"); });
+                 sendViewModelToController("Menu/Create", ko.toJSON(self), function() { alert("Done"); });
              }
          }
 
