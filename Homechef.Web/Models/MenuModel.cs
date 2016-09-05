@@ -59,5 +59,34 @@ namespace Homechef.Web.Models
             };
         }
 
+        public static MenuModel FromDomain(Menu menu)
+        {
+            return new MenuModel
+            {
+                Chefid = menu.Chefid,
+                Dishname = menu.Dishname,
+                Dishcategory = menu.Dishcategory,
+                Cuisinetype = menu.Cuisinetype,
+                Pricepp = menu.Pricepp,
+                Currency = menu.Currency,
+                Description = menu.Description,
+                Dishimage = menu.Dishimage,
+                Takeaway = menu.Takeaway,
+                Dineinwithchef = menu.Dineinwithchef,
+                Homedelivery = menu.Homedelivery,
+                Availabilitytype = menu.Availabilitytype,
+                Availableonmonday = menu.Availableonmonday,
+                Availableontuesday = menu.Availableontuesday,
+                Availableonwednesday = menu.Availableonwednesday,
+                Availableonthursday = menu.Availableonthursday,
+                Availableonfriday = menu.Availableonfriday,
+                Availableonsaturday = menu.Availableonsaturday,
+                Availableonsunday = menu.Availableonsunday,
+                Orderminimum = menu.Orderminimum,
+                Ordermaximum = menu.Ordermaximum,
+                Leadtime = menu.Leadtime,
+            };
+
+        }
     }
 }

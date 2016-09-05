@@ -1,7 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using Homechef.Repository.MsSql;
-using Dapper;
+﻿using Dapper;
 using Homechef.Domain;
 using Homechef.Data;
 

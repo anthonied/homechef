@@ -12,6 +12,7 @@ namespace Homechef.Domain
     {
         public int Id { get; set; }
         public int Chefid { get; set; }
+        
         public string Dishname { get; set; }
         public string Dishcategory { get; set; }
         public string Cuisinetype { get; set; }
@@ -34,4 +35,6 @@ namespace Homechef.Domain
         public int Ordermaximum { get; set; }
         public int Leadtime { get; set; }
     }
+
+   
 }

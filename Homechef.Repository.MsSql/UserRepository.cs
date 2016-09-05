@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Homechef.Repository.MsSql;
+﻿using System.Linq;
 using Dapper;
 using Homechef.Domain;
 using Homechef.Data;

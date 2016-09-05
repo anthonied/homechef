@@ -1,7 +1,15 @@
 ﻿@{
     ViewBag.Title = "AddMenu";
 }
+<style>
+    .validationMessage {
+        color: #f00;
+    }
 
+    .customMessage {
+        color: #FFA500;
+    }
+</style>
 <h2>Add Menu</h2>
 <div id="menuadd">
     <form onsubmit="return false">
@@ -96,46 +104,87 @@
 
 </div>
 @section scripts
-{<script>
-
-     {
-         var MenuAddViewModel = function() {
-             var self = this;
-             self.dishname = ko.observable("");
-             self.availableDishCategories = ["Home Food","Sweets,Cakes,Cookies","Party Order","Others"];
-             self.dishcategory = ko.observable("");
-             self.availableCuisine = ["African Cusine", "Chinese", "French", "Mexican", "Italian", "Indian", "Others"];
-             self.cuisinetype = ko.observable("");
-             self.pricepp = ko.observable("");
-             self.currency = ko.observable("");
-             self.description = ko.observable("");
-             self.dishimage = ko.observable("");
-             self.takeaway = ko.observable("");
-             self.dineinwithchef = ko.observable("");
-             self.homedelivery = ko.observable("");
-             self.availabilitytype = ko.observable("");
-             self.availableonmonday = ko.observable("");
-             self.availableontuesday = ko.observable("");
-             self.availableonwednesday = ko.observable("");
-             self.availableonthursday = ko.observable("");
-             self.availableonfriday = ko.observable("");
-             self.availableonsaturday = ko.observable("");
-             self.availableonsunday = ko.observable("");
-             self.orderminimum = ko.observable("");
-             self.ordermaximum = ko.observable("");
-             self.leadtime = ko.observable("");
 
 
-             self.submit = function () {
-                 console.log(self.selectedDishCategory);
-                 sendViewModelToController("Menu/Create", ko.toJSON(self), function() { alert("Done"); });
-             }
-         }
+{
+    <script>
+        ko.validation.init({
+                registerExtenders: true,
+                messagesOnModified: true,
+                insertMessages: true,
+                parseInputAttributes: true,
+                messageTemplate: null
+            },
+            true);
+
+        
+            var MenuAddViewModel = function() {
+                var self = this;
+
+                self.dishname = ko.observable("").extend({ required: true });;
+                self.availableDishCategories = ["Home Food", "Sweets,Cakes,Cookies", "Party Order", "Others"];
+                self.dishcategory = ko.observable("");
+                self.availableCuisine = [
+                    "African Cusine", "Chinese", "French", "Mexican", "Italian", "Indian", "Others"
+                ];
+                self.cuisinetype = ko.observable("");
+                self.pricepp = ko.observable("").extend({
+                    required: true,
+                    number: true
+                });
+                self.currency = ko.observable("");
+                self.description = ko.observable("");
+                self.dishimage = ko.observable("");
+                self.takeaway = ko.observable("");
+                self.dineinwithchef = ko.observable("");
+                self.homedelivery = ko.observable("");
+                self.availabilitytype = ko.observable("");
+                self.availableonmonday = ko.observable("");
+                self.availableontuesday = ko.observable("");
+                self.availableonwednesday = ko.observable("");
+                self.availableonthursday = ko.observable("");
+                self.availableonfriday = ko.observable("");
+                self.availableonsaturday = ko.observable("");
+                self.availableonsunday = ko.observable("");
+                self.orderminimum = ko.observable("").extend({
+                    required: true,
+                    number: true
+                });
+                self.ordermaximum = ko.observable("").extend({
+                    required: true,
+                    number: true,
+                    min: self.orderminimum
+
+                });
+                self.leadtime = ko.observable("").extend({
+                    required: true,
+                    number: true
+                });
 
 
-     }
+                self.submit = function() {
+                    console.log(self.errors());
 
-     ko.applyBindings(new MenuAddViewModel(), document.getElementById("menuadd"));
- </script>
-    };
+
+                    if (self.errors().length === 0) {
+                        sendViewModelToController("Menu/Create",
+                            ko.toJSON(self),
+                            function() {
+                                alert("Done");
+
+                            });
+                    } else {
+                     
+                        self.errors.showAllMessages();
+                    }
+                };
+
+            }
+
+            var viewModel = new MenuAddViewModel();
+            viewModel.errors = ko.validation.group(viewModel);
+
+        ko.applyBindings(viewModel, document.getElementById("menuadd"));
+    </script>
+};
    
