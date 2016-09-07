@@ -10,8 +10,8 @@ namespace Homechef.Repository.MsSql
     {
         public void Create(Menu menu)
         {
-            var sql = @"INSERT INTO menu(dishname,dishcategory,cuisinetype,pricepp,currency,description,dishimage,takeaway,dineinwithchef,homedelivery,availabilitytype,availableonmonday,availableontuesday,availableonwednesday,availableonthursday,availableonfriday,availableonsaturday,availableonsunday,orderminimum,ordermaximum,leadtime)
-                        VALUES(@dishname,@dishcategory,@cuisinetype,@pricepp,@currency,@description,@dishimage,@takeaway,@dineinwithchef,@homedelivery,@availabilitytype,@availableonmonday,@availableontuesday,@availableonwednesday,@availableonwednesday,@availableonfriday,@availableonsaturday,@availableonsunday,@orderminimum,@ordermaximum,@leadtime)";
+            var sql = @"INSERT INTO menu(chefid,dishname,dishcategory,cuisinetype,pricepp,currency,description,dishimage,takeaway,dineinwithchef,homedelivery,availabilitytype,availableonmonday,availableontuesday,availableonwednesday,availableonthursday,availableonfriday,availableonsaturday,availableonsunday,orderminimum,ordermaximum,leadtime)
+                        VALUES(@chefid,@dishname,@dishcategory,@cuisinetype,@pricepp,@currency,@description,@dishimage,@takeaway,@dineinwithchef,@homedelivery,@availabilitytype,@availableonmonday,@availableontuesday,@availableonwednesday,@availableonwednesday,@availableonfriday,@availableonsaturday,@availableonsunday,@orderminimum,@ordermaximum,@leadtime)";
             var data = Menu_data.FromDomain(menu);
             _db.Execute(sql, data);
         }
@@ -52,9 +52,11 @@ namespace Homechef.Repository.MsSql
 
         }
 
-        public List<Menu> GetMany()
+        public List<Menu> GetManybyUserId(int userId)
         {
-            var sql = @"SELECT * FROM menu";
+            var sql = @"SELECT C.* FROM [user] A,chef B,menu C where
+                         A.id = @userId AND B.id = @userId
+                        AND B.id = C.chefid";
             var menuData = _db.Query<Menu_data>(sql).ToList();
             return menuData.Select(ToDomain).ToList();
         }

@@ -8,10 +8,16 @@ namespace Homechef.Web.Models
         public int Id { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+
+        public string Fullname
+        {
+            get { return string.Format("{0} {1}", Firstname, Lastname); }
+        }
         public string Idnumber { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
         public int Mobile { get; set; }
+
         public string Streetname { get; set; }
         public string Suburb { get; set; }
         public string City { get; set; }
@@ -45,6 +51,30 @@ namespace Homechef.Web.Models
                 Email = Email,
                 Password = Password,
                 
+            };
+        }
+
+        public static ChefModel FromDomain(Chef chef)
+        {
+            return new ChefModel
+            {
+                Firstname = chef.Firstname,
+                Lastname = chef.Lastname,
+                Idnumber = chef.Idnumber,
+                Age = chef.Age,
+                Sex = chef.Sex,
+                Mobile = chef.Mobile,
+                Streetname = chef.Streetname,
+                Suburb = chef.Suburb,
+                City = chef.City,
+                Province = chef.Province,
+                Postalcode = chef.Postalcode,
+                Country = chef.Country,
+                Chefpicture = chef.Chefpicture,
+                Description = chef.Description,
+                Email = chef.Email,
+                Password = chef.Password,
+
             };
         }
     }

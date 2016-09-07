@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Homechef.Repository.MsSql;
 
 namespace Homechef.Web.Controllers
 {
@@ -25,6 +26,15 @@ namespace Homechef.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult Home()
+        {
+            using (var chefRepo = new ChefRepository())
+            {
+                var chef = chefRepo.GetByUserId(User.Id);
+
+                return View(chef);
+            }
         }
     }
 }

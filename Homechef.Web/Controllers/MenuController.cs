@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Homechef.Domain;
-using Homechef.Repository.MsSql;
+﻿using Homechef.Repository.MsSql;
 using Homechef.Web.Models;
 using System.Web.Mvc;
 
@@ -14,7 +9,12 @@ namespace Homechef.Web.Controllers
     {
         public ActionResult Add()
         {
-            return View();
+            using (var chefRepo = new ChefRepository())
+            {
+                var chef = chefRepo.GetByUserId(User.Id);
+
+                return View(chef.Id);
+            }
         }
 
         public JsonResult Create (MenuModel model )

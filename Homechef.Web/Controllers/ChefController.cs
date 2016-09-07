@@ -13,7 +13,12 @@ namespace Homechef.Web.Controllers
 
         public ActionResult Home()
         {
-            return View();
+            using (var chefRepo = new ChefRepository())
+            {
+                var chef = chefRepo.GetByUserId(User.Id);
+                var model = ChefModel.FromDomain(chef);
+                return View(model);
+            }
         }
 
         public JsonResult Create(ChefModel model)

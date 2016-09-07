@@ -1,4 +1,59 @@
 ﻿
-    <div>
-    vmvvbmvhjvm
+
+<h2>Chef Home Page</h2>
+<div id="chefhome">
+    
+    <div class="panel panel-default ">
+        <div class="panel-heading panel-info">My Details </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label>Home Chef Name :</label>
+                <span data-bind="text: fullName"> </span>
+            </div>
+
+            <div class="form-group">
+                <label>Address: </label>
+                <span data-bind="text: streetName"> </span>
+
+                <span></span>
+                <span data-bind="text: suburb"> </span>
+                <span data-bind="text: city"> </span>
+                <span data-bind="text: province"> </span>
+                <span data-bind="text: country"> </span>
+            </div>
+            <div class="form-group">
+                <label>About the chef:</label>
+                <span data-bind="text: description"> </span>
+            </div>
+            <button class="btn btn-primary btn-lg" data-bind="click: submit" class="btn btn-default">Add New Menu</button>
+        </div>
     </div>
+
+</div>
+@section scripts
+{
+    <script>
+
+        var model = @Html.Raw(Json.Encode(Model));
+        var chefViewModel = function() {
+            var self = this;
+            self.fullName = ko.observable(model.Fullname);
+
+            self.streetName = ko.observable(model.Streetname);
+            self.suburb = ko.observable(model.Suburb);
+            self.city = ko.observable(model.City);
+            self.province = ko.observable(model.Province);
+            self.country = ko.observable(model.Country);
+            self.description = ko.observable(model.Description);
+
+            self.submit = function() {
+
+                changeLocation("Menu/Add", true);
+            }
+
+        }
+        ko.applyBindings(new chefViewModel(), document.getElementById("chefhome"));
+    </script>
+}
+        
+
