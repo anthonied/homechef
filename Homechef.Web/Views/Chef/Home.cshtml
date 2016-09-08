@@ -2,9 +2,8 @@
 
 <h2>Chef Home Page</h2>
 <div id="chefhome">
-    
     <div class="panel panel-default ">
-        <div class="panel-heading panel-info">My Details </div>
+        <div class="panel-heading  panel-info">My Details </div>
         <div class="panel-body">
             <div class="form-group">
                 <label>Home Chef Name :</label>
@@ -29,6 +28,25 @@
         </div>
     </div>
 
+
+    <h3>My Menu</h3>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Dish Name</td>
+            <td> Dish Category</td>
+        </tr>
+        </thead>
+        <tbody data-bind ="foreach: menus">
+        <tr>
+            <td data-bind="text:Dishname"></td>
+            <td data-bind="text:Dishcategory"></td>
+            <td> </td>
+        </tr>
+        </tbody>
+
+    </table>  
 </div>
 @section scripts
 {
@@ -37,14 +55,15 @@
         var model = @Html.Raw(Json.Encode(Model));
         var chefViewModel = function() {
             var self = this;
-            self.fullName = ko.observable(model.Fullname);
+            self.fullName = ko.observable(model.Chef.Fullname);
 
-            self.streetName = ko.observable(model.Streetname);
-            self.suburb = ko.observable(model.Suburb);
-            self.city = ko.observable(model.City);
-            self.province = ko.observable(model.Province);
-            self.country = ko.observable(model.Country);
-            self.description = ko.observable(model.Description);
+            self.streetName = ko.observable(model.Chef.Streetname);
+            self.suburb = ko.observable(model.Chef.Suburb);
+            self.city = ko.observable(model.Chef.City);
+            self.province = ko.observable(model.Chef.Province);
+            self.country = ko.observable(model.Chef.Country);
+            self.description = ko.observable(model.Chef.Description);
+            self.menus = model.Menus;
 
             self.submit = function() {
 
@@ -53,7 +72,8 @@
 
         }
         ko.applyBindings(new chefViewModel(), document.getElementById("chefhome"));
+
+        
     </script>
 }
-        
 

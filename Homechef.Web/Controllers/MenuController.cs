@@ -11,17 +11,17 @@ namespace Homechef.Web.Controllers
         {
             using (var chefRepo = new ChefRepository())
             {
-                var chef = chefRepo.GetByUserId(User.Id);
+                var chef = chefRepo.GetByUser(User);
 
                 return View(chef.Id);
             }
         }
 
-        public JsonResult Create (MenuModel model )
+        public JsonResult Create (MenuAddModel addModel )
         {
             using (var repo = new MenuRepository())
             {
-                repo.Create(model.ToDomain());
+                repo.Create(addModel.ToDomain());
                 return new JsonResult
                 {
                     Data = new {IsOk = true}

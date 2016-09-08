@@ -3,7 +3,7 @@ using Homechef.Domain;
 
 namespace Homechef.Web.Models
 {
-    public class MenuModel
+    public class MenuAddModel
     {
         public int Id { get; set; }
         public int ChefId { get; set; }
@@ -59,9 +59,9 @@ namespace Homechef.Web.Models
             };
         }
 
-        public static MenuModel FromDomain(Menu menu)
+        public static MenuAddModel FromDomain(Menu menu)
         {
-            return new MenuModel
+            return new MenuAddModel
             {
                 ChefId =  menu.Chefid,
                 Dishname = menu.Dishname,

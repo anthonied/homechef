@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using Homechef.Domain;
 using Homechef.Repository.MsSql;
 using Homechef.Web.Models;
 
@@ -14,9 +16,14 @@ namespace Homechef.Web.Controllers
         public ActionResult Home()
         {
             using (var chefRepo = new ChefRepository())
+            using (var menurepo = new MenuRepository())
             {
-                var chef = chefRepo.GetByUserId(User.Id);
-                var model = ChefModel.FromDomain(chef);
+                var model = new ChefHomeModel();
+                var chef = chefRepo.GetByUser(User);
+                model.Chef = ChefModel.FromDomain(chef);
+
+                var menus = menurepo.GetManyMenubyUserId(User.Id);
+                model.Menus = menus.Select(MenuDisplayModel.FromDomain).ToList();
                 return View(model);
             }
         }

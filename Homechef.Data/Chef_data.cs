@@ -43,13 +43,8 @@ namespace Homechef.Data
                 country =chef.Country,
                 chefpicture =chef.Chefpicture,
                 description =chef.Description,
-                email = chef.Email,
-                password = chef.Password,
-       
+                email = chef.Email
             };
-
         }
-    
     }
-
 }

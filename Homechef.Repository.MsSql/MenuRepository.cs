@@ -44,20 +44,23 @@ namespace Homechef.Repository.MsSql
                 Ordermaximum = menudata.ordermaximum,
                 Leadtime = menudata.leadtime,
 
-            }
-            ;
-
-
-
+            };
+         
 
         }
 
-        public List<Menu> GetManybyUserId(int userId)
+        public List<Menu> GetManyMenubyUserId(int userId)
         {
-            var sql = @"SELECT C.* FROM [user] A,chef B,menu C where
-                         A.id = @userId AND B.id = @userId
-                        AND B.id = C.chefid";
-            var menuData = _db.Query<Menu_data>(sql).ToList();
+            var sql = @"IF EXISTS (SELECT 1 FROM menu ,chef,[user]where [user].id = @userId AND chef.user_id = @userId
+                        AND chef.id = menu.chefid)
+
+BEGIN
+
+SELECT C.* FROM [user] A,chef B,menu C where
+                         A.id = @userId AND B.user_id = @userId
+                        AND B.id = C.chefid
+END";
+            var menuData = _db.Query<Menu_data>(sql, new {userId}).ToList();
             return menuData.Select(ToDomain).ToList();
         }
     }

@@ -47,15 +47,15 @@ SELECT @login";
 
         }
 
-        public Chef GetByUserId(int userId)
+        public Chef GetByUser(User user)
         {
             var sql = "SELECT A.*,B.email from chef A,[user] B where A.user_id = @userId AND B.id = @userId";
 
-            var chefData = _db.Query<Chef_data>(sql, new {userId}).First();
-            return toDomain(chefData);
+            var chefData = _db.Query<Chef_data>(sql, new {user.Id}).First();
+            return toDomain(chefData, user);
         }
 
-        private Chef toDomain(Chef_data chefData)
+        private Chef toDomain(Chef_data chefData, User user)
         {
             return new Chef
             {
@@ -74,7 +74,7 @@ SELECT @login";
                 Country = chefData.country,
                 Chefpicture =chefData.chefpicture,
                 Description =chefData.description,
-                Email = chefData.email,
+                Email = user.Email,
        
     };
         }

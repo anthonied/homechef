@@ -31,8 +31,7 @@ namespace Homechef.Web.Controllers
         {
             using (var chefRepo = new ChefRepository())
             {
-                var chef = chefRepo.GetByUserId(User.Id);
-
+                var chef = chefRepo.GetByUser(User);
                 return View(chef);
             }
         }

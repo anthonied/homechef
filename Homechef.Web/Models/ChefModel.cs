@@ -49,8 +49,6 @@ namespace Homechef.Web.Models
                 Chefpicture=Chefpicture,
                 Description=Description,
                 Email = Email,
-                Password = Password,
-                
             };
         }
 
@@ -73,8 +71,6 @@ namespace Homechef.Web.Models
                 Chefpicture = chef.Chefpicture,
                 Description = chef.Description,
                 Email = chef.Email,
-                Password = chef.Password,
-
             };
         }
     }
