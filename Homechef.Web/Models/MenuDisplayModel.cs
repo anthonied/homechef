@@ -27,6 +27,7 @@ namespace Homechef.Web.Models
         public int Orderminimum { get; set; }
         public int Ordermaximum { get; set; }
         public int Leadtime { get; set; }
+        public string Status { get; set; }
 
         public static MenuDisplayModel FromDomain(Menu menu)
         {
@@ -44,6 +45,7 @@ namespace Homechef.Web.Models
                 Takeaway = menu.Takeaway,
                 Dineinwithchef = menu.Dineinwithchef,
                 Homedelivery = menu.Homedelivery,
+                Availabilitytype = menu.Availabilitytype,
                 Availableonmonday = menu.Availableonmonday,
                 Availableontuesday = menu.Availableontuesday,
                 Availableonwednesday = menu.Availableonwednesday,
@@ -54,6 +56,7 @@ namespace Homechef.Web.Models
                 Orderminimum = menu.Orderminimum,
                 Ordermaximum = menu.Ordermaximum,
                 Leadtime = menu.Leadtime,
+                Status = menu.Status,
 
 
             };

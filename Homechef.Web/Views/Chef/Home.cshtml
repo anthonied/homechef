@@ -31,17 +31,32 @@
 
     <h3>My Menu</h3>
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table">
+        <thead class="thead-inverse">
         <tr>
             <td>Dish Name</td>
             <td> Dish Category</td>
+            <td> Price per portion in Rand</td>
+            <td> Take Away</td>
+            <td> Dine in with Chef</td>
+            <td> Home Delivery</td>
+            <td> Availability Type</td>
+            <td> Order Before(In Hours)</td>
+            <td> Status</td>
         </tr>
         </thead>
         <tbody data-bind ="foreach: menus">
-        <tr>
+        <tr >
+           
             <td data-bind="text:Dishname"></td>
             <td data-bind="text:Dishcategory"></td>
+            <td data-bind="text:Pricepp"></td>
+            <td data-bind="text:Takeaway"></td>
+            <td data-bind="text:Dineinwithchef"></td>
+            <td data-bind="text:Homedelivery"></td>
+            <td data-bind="text:Availabilitytype"></td>
+            <td data-bind="text:Leadtime"></td>
+            <td data-bind="text:Status"></td>
             <td> </td>
         </tr>
         </tbody>

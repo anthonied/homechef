@@ -30,12 +30,16 @@ namespace Homechef.Web.Controllers
 
         public JsonResult Create(ChefModel model)
         {
-            var repo = new ChefRepository();
-            repo.Create(model.ToDomain());
-            return new JsonResult
+            using (var chefRepo = new ChefRepository())
+            using (var userRepo = new UserRepository())
             {
-                Data = new { IsOk = true }
-            };
+                userRepo.Create(new User {Email = model.Email, Password = model.Password});
+                chefRepo.Create(model.ToDomain());
+                return new JsonResult
+                {
+                    Data = new {IsOk = true}
+                };
+            }
         }
     }
 }

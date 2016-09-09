@@ -28,6 +28,7 @@ namespace Homechef.Web.Models
         public int Orderminimum { get; set; }
         public int Ordermaximum { get; set; }
         public int Leadtime { get; set; }
+        public string Status { get; set; }
 
         public Menu ToDomain()
         {

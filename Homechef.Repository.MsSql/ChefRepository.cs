@@ -9,47 +9,28 @@ namespace Homechef.Repository.MsSql
     {
         public void Create(Chef chef)
         {
-            var sql = @"IF NOT EXISTS (SELECT 1 FROM [user] WHERE email = @email)
+            var sql = @" IF  EXISTS (SELECT 1 FROM [user] WHERE email = @email)
+        BEGIN
+                DECLARE @userid int
+				SELECT @userid =id FROM [user] where email = @email
+               
+              IF NOT EXISTS (SELECT 1 FROM chef WHERE user_id= @userid)
 
-BEGIN
+            BEGIN  
+                 INSERT INTO chef
+                     (firstname,lastname,idnumber,age,sex,mobile,streetname,suburb,city,province,postalcode,country,chefpicture,description,user_id)
+                    VALUES 
+                     (@firstname,@lastname,@idnumber,@age,@sex,@mobile,@streetname,@suburb,@city,@province,@postalcode,@country,@chefpicture,@description,@userid)
+            END
+       END";
 
-INSERT INTO [user](email,password)
-                    VALUES(@email,@password)
-DECLARE @userid int
-					 SELECT @userid =id FROM [user] where email = @email AND PASSWORD = @password
-INSERT INTO chef(firstname,lastname,idnumber,age,sex,mobile,streetname,suburb,city,province,postalcode,country,chefpicture,description,user_id)
-                    VALUES (@firstname,@lastname,@idnumber,@age,@sex,@mobile,@streetname,@suburb,@city,@province,@postalcode,@country,@chefpicture,@description,@userid)
-                   
-END
-ELSE
-BEGIN
-	DECLARE
-	@login varchar(20) 
-	SET @login='Already got an account with this email'
-END
-SELECT @login";
-        var data = Chef_data.FromDomain(chef);
-        var result =_db.Execute(sql, data);
-            
-
-
-
-
-
-            // var sql = @"INSERT INTO [user](email,password)
-            //         VALUES(@email,@password)INSERT INTO chef(firstname,lastname,idnumber,age,sex,mobile,streetname,suburb,city,province,postalcode,country,chefpicture,description)
-            //         VALUES (@firstname,@lastname,@idnumber,@age,@sex,@mobile,@streetname,@suburb,@city,@province,@postalcode,@country,@chefpicture,@description)
-            //         ";
-            // var data = Chef_data.FromDomain(chef);
-            // _db.Execute(sql, data);
-
-
-
+            var data = Chef_data.FromDomain(chef);
+             _db.Execute(sql, data);
         }
 
         public Chef GetByUser(User user)
         {
-            var sql = "SELECT A.*,B.email from chef A,[user] B where A.user_id = @userId AND B.id = @userId";
+            var sql = "SELECT A.*,B.email from chef A,[user] B where A.user_id = @Id AND B.id = @Id";
 
             var chefData = _db.Query<Chef_data>(sql, new {user.Id}).First();
             return toDomain(chefData, user);

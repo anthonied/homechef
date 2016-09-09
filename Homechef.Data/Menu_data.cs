@@ -29,6 +29,7 @@ namespace Homechef.Data
         public int orderminimum { get; set; }
         public int ordermaximum { get; set; }
         public int leadtime { get; set; }
+        public string status { get; set; }
 
         public static Menu_data FromDomain(Menu menu)
         {
@@ -58,6 +59,7 @@ namespace Homechef.Data
                 orderminimum =menu.Orderminimum,
                 ordermaximum =menu.Ordermaximum,
                 leadtime =menu.Leadtime,
+                status = menu.Status,
              };
         }
     }

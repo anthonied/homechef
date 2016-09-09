@@ -10,8 +10,8 @@ namespace Homechef.Repository.MsSql
     {
         public void Create(Menu menu)
         {
-            var sql = @"INSERT INTO menu(chefid,dishname,dishcategory,cuisinetype,pricepp,currency,description,dishimage,takeaway,dineinwithchef,homedelivery,availabilitytype,availableonmonday,availableontuesday,availableonwednesday,availableonthursday,availableonfriday,availableonsaturday,availableonsunday,orderminimum,ordermaximum,leadtime)
-                        VALUES(@chefid,@dishname,@dishcategory,@cuisinetype,@pricepp,@currency,@description,@dishimage,@takeaway,@dineinwithchef,@homedelivery,@availabilitytype,@availableonmonday,@availableontuesday,@availableonwednesday,@availableonwednesday,@availableonfriday,@availableonsaturday,@availableonsunday,@orderminimum,@ordermaximum,@leadtime)";
+            var sql = @"INSERT INTO menu(chefid,dishname,dishcategory,cuisinetype,pricepp,currency,description,dishimage,takeaway,dineinwithchef,homedelivery,availabilitytype,availableonmonday,availableontuesday,availableonwednesday,availableonthursday,availableonfriday,availableonsaturday,availableonsunday,orderminimum,ordermaximum,leadtime,status)
+                        VALUES(@chefid,@dishname,@dishcategory,@cuisinetype,@pricepp,@currency,@description,@dishimage,@takeaway,@dineinwithchef,@homedelivery,@availabilitytype,@availableonmonday,@availableontuesday,@availableonwednesday,@availableonwednesday,@availableonfriday,@availableonsaturday,@availableonsunday,@orderminimum,@ordermaximum,@leadtime,'Active')";
             var data = Menu_data.FromDomain(menu);
             _db.Execute(sql, data);
         }
@@ -43,6 +43,7 @@ namespace Homechef.Repository.MsSql
                 Orderminimum = menudata.orderminimum,
                 Ordermaximum = menudata.ordermaximum,
                 Leadtime = menudata.leadtime,
+                Status =menudata.status,
 
             };
          

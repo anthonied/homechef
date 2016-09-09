@@ -15,5 +15,24 @@ namespace Homechef.Repository.MsSql
 
             return userData?.ToDomain();
         }
-    }
+
+
+        public void Create(User user)
+        {
+            var sql = @"IF NOT EXISTS (SELECT 1 FROM [user] WHERE email = @email)
+
+    BEGIN
+
+        INSERT INTO [user](email,password)
+                    VALUES(@email,@password)
+                          
+    END";
+
+
+            var data = User_data.FromDomain(user);
+            var result = _db.Execute(sql, data);
+           
+
+        }
+}
 }
