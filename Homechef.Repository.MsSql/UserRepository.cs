@@ -16,6 +16,14 @@ namespace Homechef.Repository.MsSql
             return userData?.ToDomain();
         }
 
+        public User CheckEmail(string email)
+        {
+            var sql = @"SELECT id, email,password FROM [user] where email = @email ";
+
+            var user = _db.Query<User_data>(sql, new { email }).FirstOrDefault();
+
+            return user?.ToDomain();
+        }
 
         public void Create(User user)
         {

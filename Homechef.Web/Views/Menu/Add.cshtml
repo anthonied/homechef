@@ -37,8 +37,12 @@
         </div>
         <div class="form-group">
             <label>Currency</label>
-            <input type="text" class="form-control" placeholder="Currency" data-bind="value: currency">
+            <select data-bind="options: availableCurrency,
+                   value: currency,
+                   optionsCaption: 'Choose currency...'"></select>
+
         </div>
+        
         <div class="form-group">
         <label>Description about your menu</label>
         <input type="text" class="form-control" placeholder="Description about your menu" data-bind="value: description">
@@ -132,7 +136,9 @@
                     required: true,
                     number: true
                 });
+                self.availableCurrency = ["South African Rand"];
                 self.currency = ko.observable("");
+               
                 self.description = ko.observable("");
                 self.dishimage = ko.observable("");
                 self.takeaway = ko.observable("");

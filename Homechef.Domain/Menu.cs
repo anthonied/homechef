@@ -20,9 +20,9 @@ namespace Homechef.Domain
         public string Currency { get; set; }
         public string Description { get; set; }
         public string Dishimage { get; set; }
-        public string Takeaway { get; set; }
-        public string Dineinwithchef { get; set; }
-        public string Homedelivery { get; set; }
+        public bool CanOrderAsTakeaway { get; set; }
+        public bool CanOrderAsDineinwithchef { get; set; }
+        public bool CanOrderAsHomedelivery { get; set; }
         public string Availabilitytype { get; set; }
         public string Availableonmonday { get; set; }
         public string Availableontuesday { get; set; }

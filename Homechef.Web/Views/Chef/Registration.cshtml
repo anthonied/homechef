@@ -132,18 +132,25 @@
                 if (self.errors().length === 0) {
                     sendViewModelToController("Chef/Create",
                         ko.toJSON(self),
-                        function() {
-                            alert("Done");
+                        function(response) {
+                            if (!response) {
+                                alert("Please use another email..A chef  whith this email address already created");
+
+                                return;
+                            }
+                            {
+                                alert("Done");
+                            }
                         });
-                    //         console.log("correct");
-                } else {
-                    //     console.log("not valid");
-                    self.errors.showAllMessages();
-                }
-            };
-
-
-        }
+                
+                //         console.log("correct");
+            } else
+            {
+                //     console.log("not valid");
+                self.errors.showAllMessages();
+            }
+        };
+    }
 
         var viewModel = new ChefRegistrationViewModel();
         viewModel.errors = ko.validation.group(viewModel);

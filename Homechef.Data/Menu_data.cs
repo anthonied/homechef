@@ -15,9 +15,9 @@ namespace Homechef.Data
         public string currency { get; set; }
         public string description { get; set; }
         public string dishimage { get; set; }
-        public string takeaway { get; set; }
-        public string dineinwithchef { get; set; }
-        public string homedelivery { get; set; }
+        public bool takeaway { get; set; }
+        public bool dineinwithchef { get; set; }
+        public bool homedelivery { get; set; }
         public string availabilitytype { get; set; }
         public string availableonmonday { get; set; }
         public string availableontuesday { get; set; }
@@ -45,9 +45,9 @@ namespace Homechef.Data
                 currency =menu.Currency,
                 description =menu.Description,
                 dishimage =menu.Dishimage,
-                takeaway = menu.Takeaway,
-                dineinwithchef = menu.Dineinwithchef,
-                homedelivery = menu.Homedelivery,
+                takeaway = menu.CanOrderAsTakeaway,
+                dineinwithchef = menu.CanOrderAsDineinwithchef,
+                homedelivery = menu.CanOrderAsHomedelivery,
                 availabilitytype = menu.Availabilitytype,
                 availableonmonday = menu.Availableonmonday,
                 availableontuesday = menu.Availableontuesday,

@@ -14,9 +14,9 @@ namespace Homechef.Web.Models
         public string Currency { get; set; }
         public string Description { get; set; }
         public string Dishimage { get; set; }
-        public string Takeaway { get; set; }
-        public string Dineinwithchef { get; set; }
-        public string Homedelivery { get; set; }
+        public bool Takeaway { get; set; }
+        public bool Dineinwithchef { get; set; }
+        public bool Homedelivery { get; set; }
         public string Availabilitytype { get; set; }
         public string Availableonmonday { get; set; }
         public string Availableontuesday { get; set; }
@@ -36,27 +36,26 @@ namespace Homechef.Web.Models
             {
                 Chefid = ChefId,
                 Dishname = Dishname,
-                Dishcategory =Dishcategory,
+                Dishcategory = Dishcategory,
                 Cuisinetype = Cuisinetype,
                 Pricepp = Pricepp,
                 Currency = Currency,
                 Description = Description,
                 Dishimage = Dishimage,
-                Takeaway = Takeaway,
-                Dineinwithchef = Dineinwithchef,
-                Homedelivery = Homedelivery,
+                CanOrderAsTakeaway = Takeaway,
+                CanOrderAsDineinwithchef = Dineinwithchef,
+                CanOrderAsHomedelivery = Homedelivery,
                 Availabilitytype = Availabilitytype,
-               Availableonmonday = Availableonmonday,
-               Availableontuesday = Availableontuesday,
-               Availableonwednesday = Availableonwednesday,
-               Availableonthursday = Availableonthursday,
-               Availableonfriday = Availableonfriday,
-               Availableonsaturday = Availableonsaturday,
-               Availableonsunday = Availableonsunday,
+                Availableonmonday = Availableonmonday,
+                Availableontuesday = Availableontuesday,
+                Availableonwednesday = Availableonwednesday,
+                Availableonthursday = Availableonthursday,
+                Availableonfriday = Availableonfriday,
+                Availableonsaturday = Availableonsaturday,
+                Availableonsunday = Availableonsunday,
                 Orderminimum = Orderminimum,
                 Ordermaximum = Ordermaximum,
                 Leadtime = Leadtime,
-
             };
         }
 
@@ -72,9 +71,9 @@ namespace Homechef.Web.Models
                 Currency = menu.Currency,
                 Description = menu.Description,
                 Dishimage = menu.Dishimage,
-                Takeaway = menu.Takeaway,
-                Dineinwithchef = menu.Dineinwithchef,
-                Homedelivery = menu.Homedelivery,
+                Takeaway = menu.CanOrderAsTakeaway,
+                Dineinwithchef = menu.CanOrderAsDineinwithchef,
+                Homedelivery = menu.CanOrderAsHomedelivery,
                 Availabilitytype = menu.Availabilitytype,
                 Availableonmonday = menu.Availableonmonday,
                 Availableontuesday = menu.Availableontuesday,

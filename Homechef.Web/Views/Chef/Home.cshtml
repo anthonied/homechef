@@ -6,6 +6,7 @@
         <div class="panel-heading  panel-info">My Details </div>
         <div class="panel-body">
             <div class="form-group">
+             
                 <label>Home Chef Name :</label>
                 <span data-bind="text: fullName"> </span>
             </div>
@@ -26,43 +27,49 @@
             </div>
             <button class="btn btn-primary btn-lg" data-bind="click: submit" class="btn btn-default">Add New Menu</button>
         </div>
+     
+    </div>
+    
+        <h3>My Menu</h3>
+
+        <table class="table table-striped table-bordered ">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Dish Name</th>
+                <th> Dish Category</th>
+                <th> Price per portion in Rand</th>
+                <th> Take Away</th>
+                <th> Dine in with Chef</th>
+                <th> Home Delivery</th>
+                <th> Availability Type</th>
+                <th> Order Before(In Hours)</th>
+                <th> Status</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: menus">
+            <tr>
+                <td data-bind="text:Dishname"></td>
+                <td data-bind="text:Dishcategory"></td>
+                <td data-bind="text:Pricepp"></td>
+                <td style="text-align: center"> 
+                    <input type="checkbox" data-bind="checked: Takeaway" disabled>
+                   </td>
+                <td style="text-align: center">
+                    <input type="checkbox" data-bind="checked: Dineinwithchef" disabled>
+                </td>
+                <td style="text-align: center">
+                    <input type="checkbox" data-bind="checked: Homedelivery" disabled>
+                </td>
+               
+                <td data-bind="text:Availabilitytype"></td>
+                <td data-bind="text:Leadtime"></td>
+                <td data-bind="text:Status"></td>
+              </tr>
+            </tbody>
+
+        </table>
     </div>
 
-
-    <h3>My Menu</h3>
-
-    <table class="table">
-        <thead class="thead-inverse">
-        <tr>
-            <td>Dish Name</td>
-            <td> Dish Category</td>
-            <td> Price per portion in Rand</td>
-            <td> Take Away</td>
-            <td> Dine in with Chef</td>
-            <td> Home Delivery</td>
-            <td> Availability Type</td>
-            <td> Order Before(In Hours)</td>
-            <td> Status</td>
-        </tr>
-        </thead>
-        <tbody data-bind ="foreach: menus">
-        <tr >
-           
-            <td data-bind="text:Dishname"></td>
-            <td data-bind="text:Dishcategory"></td>
-            <td data-bind="text:Pricepp"></td>
-            <td data-bind="text:Takeaway"></td>
-            <td data-bind="text:Dineinwithchef"></td>
-            <td data-bind="text:Homedelivery"></td>
-            <td data-bind="text:Availabilitytype"></td>
-            <td data-bind="text:Leadtime"></td>
-            <td data-bind="text:Status"></td>
-            <td> </td>
-        </tr>
-        </tbody>
-
-    </table>  
-</div>
 @section scripts
 {
     <script>
