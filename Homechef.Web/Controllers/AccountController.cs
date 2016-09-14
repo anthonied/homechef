@@ -25,6 +25,23 @@ namespace Homechef.Web.Controllers
             return View();
         }
 
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+        public JsonResult ChangePassword(ResetPasswordModel model)
+        {
+            using (var userRepo = new UserRepository())
+            {
+                userRepo.ResetUserPassword(new User { Email = model.Email, Password = model.Newpassword });
+                return new JsonResult
+                {
+                    Data = new { IsOk = true }
+                };
+            }
+            
+        }
+
         public JsonResult AttemptLogin(LoginModel model)
         {
             using (var userRepo = new UserRepository())

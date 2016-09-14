@@ -60,6 +60,7 @@ BEGIN
 SELECT C.* FROM [user] A,chef B,menu C where
                          A.id = @userId AND B.user_id = @userId
                         AND B.id = C.chefid
+ORDER BY C.status
 END";
             var menuData = _db.Query<Menu_data>(sql, new {userId}).ToList();
             return menuData.Select(ToDomain).ToList();

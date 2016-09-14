@@ -7,6 +7,21 @@ namespace Homechef.Repository.MsSql
 {
    public class UserRepository : RepositoryBase
     {
+        public void ResetUserPassword(User user)
+        {
+            var sql = @"
+
+                    UPDATE  [user]
+		            set password=@password
+		            where email =@email
+                ";
+
+
+            var data = User_data.FromDomain(user);
+            var result = _db.Execute(sql, data);
+
+
+        }
         public User GetByEmail(string email)
         {
             var sql = @"SELECT id, email,password FROM [user] where email = @email ";
