@@ -20,6 +20,55 @@ namespace Homechef.Web.Controllers
 
     public class AccountController : BaseController
     {
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        public JsonResult Createuser(UserModel model)
+        {
+            using (var userRepo1 = new UserRepository())
+            {
+                var user = userRepo1.CheckEmail(model.Email);
+                if (user == null)
+                {
+                    if (model.Option == "chef")
+                    {
+                        using (var userrepo = new UserRepository())
+                        using (var chefrepo = new ChefRepository())
+                        {
+                            userrepo.Create(model.ToDomain());
+                            chefrepo.Create(new Chef {Email = model.Email});
+                            return new JsonResult
+                            {
+                                Data = new {IsOk = true}
+                            };
+                        }
+                    }
+                    else
+                    {
+                        using (var userrepo = new UserRepository())
+                        using (var clientrepo = new ClientRepository())
+                        {
+                            userrepo.Create(model.ToDomain());
+                            clientrepo.Create(new Client {Email = model.Email});
+                            return new JsonResult
+                            {
+                                Data = new {IsOk = true}
+                            };
+                        }
+
+                    }
+                }
+                else
+                {
+                    {
+                        return Json(false);
+                    }
+                }
+            }
+
+        }
         public ActionResult Login()
         {
             return View();

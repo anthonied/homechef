@@ -1,4 +1,5 @@
-﻿namespace Homechef.Domain
+﻿using System;
+namespace Homechef.Domain
 {
     public class User
     {
