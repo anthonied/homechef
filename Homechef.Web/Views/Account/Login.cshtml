@@ -54,10 +54,14 @@
                         function(response) {
                             if (!response) {
                                 alert("Login Failed");
-
                                 return;
                             }
-                            changeLocation("Chef/Home", true);
+                           if (response == "chef") {
+                               changeLocation("Chef/Home", true);
+                               return;
+                           }
+
+                           changeLocation("Client/Home", true);
                         });
                 }
                 else {

@@ -2,6 +2,7 @@
 using Dapper;
 using Homechef.Domain;
 using Homechef.Data;
+using System.Linq;
 
 namespace Homechef.Repository.MsSql
 {
@@ -27,5 +28,14 @@ namespace Homechef.Repository.MsSql
             var data = Client_data.FromDomain(client);
             _db.Execute(sql, data);
         }
+
+        //public Client CheckClientbyuser_id(int id)
+        //{
+        //    var sql = @"SELECT id,user_id FROM chef where user_id = @id ";
+
+        //    var client = _db.Query<Client_data>(sql, new { id }).FirstOrDefault();
+
+        //    return client?.ToDomain();
+        //}
     }
 }

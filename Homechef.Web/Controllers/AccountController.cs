@@ -69,6 +69,7 @@ namespace Homechef.Web.Controllers
             }
 
         }
+
         public ActionResult Login()
         {
             return View();
@@ -78,17 +79,18 @@ namespace Homechef.Web.Controllers
         {
             return View();
         }
+
         public JsonResult ChangePassword(ResetPasswordModel model)
         {
             using (var userRepo = new UserRepository())
             {
-                userRepo.ResetUserPassword(new User { Email = model.Email, Password = model.Newpassword });
+                userRepo.ResetUserPassword(new User {Email = model.Email, Password = model.Newpassword});
                 return new JsonResult
                 {
-                    Data = new { IsOk = true }
+                    Data = new {IsOk = true}
                 };
             }
-            
+
         }
 
         public JsonResult AttemptLogin(LoginModel model)
@@ -117,7 +119,15 @@ namespace Homechef.Web.Controllers
                 var faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
                 Response.Cookies.Add(faCookie);
 
-                return Json(true);
+                using (var chefRepo = new ChefRepository())
+                {
+                    var chef = chefRepo.CheckChefbyuser_id(user.Id);
+                    return Json(chef != null ? "chef" : "client");
+                    // return Json(true);
+                }
+
+
+
             }
         }
     }

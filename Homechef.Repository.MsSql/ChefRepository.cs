@@ -28,6 +28,14 @@ namespace Homechef.Repository.MsSql
              _db.Execute(sql, data);
         }
 
+        public Chef CheckChefbyuser_id(int id)
+        {
+            var sql = @"SELECT * FROM chef where user_id = @id ";
+
+            var chef = _db.Query<Chef_data>(sql, new { id }).FirstOrDefault();
+
+            return chef?.ToDomain();
+        }
         public Chef GetByUser(User user)
         {
             var sql = "SELECT A.*,B.email from chef A,[user] B where A.user_id = @Id AND B.id = @Id";
@@ -35,6 +43,29 @@ namespace Homechef.Repository.MsSql
             var chefData = _db.Query<Chef_data>(sql, new {user.Id}).First();
             return toDomain(chefData, user);
         }
+        //public Chef Update()
+        //{
+        //    //UPDATE chef
+        //    //            SET
+        //    //            firstname = @firstname,
+        //    //            lastname = @lastname,
+        //    //            idnumber = @idnumber,
+        //    //            age = @age,
+        //    //            sex = @sex,
+        //    //            mobile = @mobile,
+        //    //            streetname = @streetname,
+        //    //            suburb = @suburb,
+        //    //            city = @city,
+        //    //            province = @province,
+        //    //            postalcode = @postalcode,
+        //    //            country = @country,
+        //    //            chefpicture = @chefpicture,
+        //    //            description = @description
+
+        //    //            WHERE
+        //    //            user_id = @userid
+        //    //             ";
+        //}
 
         private Chef toDomain(Chef_data chefData, User user)
         {

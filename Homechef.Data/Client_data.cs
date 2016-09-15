@@ -11,6 +11,7 @@ namespace Homechef.Data
         public int mobile { get; set; }
         public string email { get; set; }
 
+        
         public static Client_data FromDomain(Client client)
         {
             return new Client_data
@@ -20,6 +21,19 @@ namespace Homechef.Data
                 idnumber = client.Idnumber,
                 mobile = client.Mobile,
                 email = client.Email
+            };
+        }
+
+        public Client ToDomain()
+        {
+            return new Client
+            {
+                Id = id,
+                Firstname =firstname,
+                Lastname = lastname,
+                Idnumber = idnumber,
+                Mobile = mobile,
+
             };
         }
     }

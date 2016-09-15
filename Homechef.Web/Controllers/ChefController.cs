@@ -10,7 +10,12 @@ namespace Homechef.Web.Controllers
     {
         public ActionResult Registration()
         {
-            return View();
+            using (var chefRepo = new ChefRepository())
+            {
+                var model = chefRepo.GetByUser(User);
+              return View(model);
+            }
+
         }
 
         public ActionResult Home()
@@ -30,32 +35,19 @@ namespace Homechef.Web.Controllers
 
         public JsonResult Create(ChefModel model)
         {
-
-            using (var userRepo1 = new UserRepository())
-            {
-                var user = userRepo1.CheckEmail(model.Email);
-
-                if (user == null)
-                {
+            
                     using (var chefRepo = new ChefRepository())
-                    using (var userRepo = new UserRepository())
-
-                    {
-                        userRepo.Create(new User {Email = model.Email, Password = model.Password});
-                        chefRepo.Create(model.ToDomain());
+                   {
+                         var chef = chefRepo.GetByUser(User);
+                chefRepo.Create(model.ToDomain(),User);
                         return new JsonResult
                         {
                             Data = new {IsOk = true}
                         };
                     }
-                }
-                else
-                {
-                    {
-                        return Json(false);
-                    }
-                }
-            }
+                
+               
+            
         }
     }
 }
