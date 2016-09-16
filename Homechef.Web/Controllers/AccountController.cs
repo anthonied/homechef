@@ -48,10 +48,10 @@ namespace Homechef.Web.Controllers
                     else
                     {
                         using (var userrepo = new UserRepository())
-                        using (var clientrepo = new ClientRepository())
+                        using (var customerrepo = new CustomerRepository())
                         {
                             userrepo.Create(model.ToDomain());
-                            clientrepo.Create(new Client {Email = model.Email});
+                            customerrepo.Create(new Customer {Email = model.Email});
                             return new JsonResult
                             {
                                 Data = new {IsOk = true}
@@ -122,7 +122,7 @@ namespace Homechef.Web.Controllers
                 using (var chefRepo = new ChefRepository())
                 {
                     var chef = chefRepo.CheckChefbyuser_id(user.Id);
-                    return Json(chef != null ? "chef" : "client");
+                    return Json(chef != null ? "chef" : "customer");
                     // return Json(true);
                 }
 

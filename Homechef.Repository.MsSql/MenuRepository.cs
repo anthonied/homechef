@@ -10,8 +10,8 @@ namespace Homechef.Repository.MsSql
     {
         public void Create(Menu menu)
         {
-            var sql = @"INSERT INTO menu(chefid,dishname,dishcategory,cuisinetype,pricepp,currency,description,dishimage,takeaway,dineinwithchef,homedelivery,availabilitytype,availableonmonday,availableontuesday,availableonwednesday,availableonthursday,availableonfriday,availableonsaturday,availableonsunday,orderminimum,ordermaximum,leadtime,status)
-                        VALUES(@chefid,@dishname,@dishcategory,@cuisinetype,@pricepp,@currency,@description,@dishimage,@takeaway,@dineinwithchef,@homedelivery,@availabilitytype,@availableonmonday,@availableontuesday,@availableonwednesday,@availableonwednesday,@availableonfriday,@availableonsaturday,@availableonsunday,@orderminimum,@ordermaximum,@leadtime,'Active')";
+            var sql = @"INSERT INTO menu(chef_id,dishname,dishcategory,cuisinetype,pricepp,currency,description,dishimage,takeaway,dineinwithchef,homedelivery,availabilitytype,availableonmonday,availableontuesday,availableonwednesday,availableonthursday,availableonfriday,availableonsaturday,availableonsunday,orderminimum,ordermaximum,leadtime,status)
+                        VALUES(@chef_id,@dishname,@dishcategory,@cuisinetype,@pricepp,@currency,@description,@dishimage,@takeaway,@dineinwithchef,@homedelivery,@availabilitytype,@availableonmonday,@availableontuesday,@availableonwednesday,@availableonwednesday,@availableonfriday,@availableonsaturday,@availableonsunday,@orderminimum,@ordermaximum,@leadtime,'Active')";
             var data = Menu_data.FromDomain(menu);
             _db.Execute(sql, data);
         }
@@ -21,7 +21,7 @@ namespace Homechef.Repository.MsSql
             return new Menu
             {
                 Id = menudata.id,
-                Chefid = menudata.chefid,
+                Chef_id = menudata.chef_id,
                 Dishname = menudata.dishname,
                 Dishcategory = menudata.dishcategory,
                 Cuisinetype = menudata.cuisinetype,
@@ -53,13 +53,13 @@ namespace Homechef.Repository.MsSql
         public List<Menu> GetManyMenubyUserId(int userId)
         {
             var sql = @"IF EXISTS (SELECT 1 FROM menu ,chef,[user]where [user].id = @userId AND chef.user_id = @userId
-                        AND chef.id = menu.chefid)
+                        AND chef.id = menu.chef_id)
 
 BEGIN
 
 SELECT C.* FROM [user] A,chef B,menu C where
                          A.id = @userId AND B.user_id = @userId
-                        AND B.id = C.chefid
+                        AND B.id = C.chef_id
 ORDER BY C.status
 END";
             var menuData = _db.Query<Menu_data>(sql, new {userId}).ToList();

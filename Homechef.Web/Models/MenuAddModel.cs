@@ -6,7 +6,7 @@ namespace Homechef.Web.Models
     public class MenuAddModel
     {
         public int Id { get; set; }
-        public int ChefId { get; set; }
+        public int Chef_Id { get; set; }
         public string Dishname { get; set; }
         public string Cuisinetype { get; set; }
         public string Dishcategory { get; set; }
@@ -34,7 +34,7 @@ namespace Homechef.Web.Models
         {
             return new Menu
             {
-                Chefid = ChefId,
+                Chef_id = Chef_Id,
                 Dishname = Dishname,
                 Dishcategory = Dishcategory,
                 Cuisinetype = Cuisinetype,
@@ -63,7 +63,7 @@ namespace Homechef.Web.Models
         {
             return new MenuAddModel
             {
-                ChefId =  menu.Chefid,
+                Chef_Id =  menu.Chef_id,
                 Dishname = menu.Dishname,
                 Dishcategory = menu.Dishcategory,
                 Cuisinetype = menu.Cuisinetype,

@@ -2,31 +2,31 @@
 using Homechef.Domain;
 namespace Homechef.Data
 {
-    public class Client_data
+    public class Customer_data
     {
         public int id { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string idnumber { get; set; }
-        public int mobile { get; set; }
+        public string mobile { get; set; }
         public string email { get; set; }
 
         
-        public static Client_data FromDomain(Client client)
+        public static Customer_data FromDomain(Customer customer)
         {
-            return new Client_data
+            return new Customer_data
             {
-                firstname = client.Firstname,
-                lastname = client.Lastname,
-                idnumber = client.Idnumber,
-                mobile = client.Mobile,
-                email = client.Email
+                firstname = customer.Firstname,
+                lastname = customer.Lastname,
+                idnumber = customer.Idnumber,
+                mobile = customer.Mobile,
+                email = customer.Email
             };
         }
 
-        public Client ToDomain()
+        public Customer ToDomain()
         {
-            return new Client
+            return new Customer
             {
                 Id = id,
                 Firstname =firstname,

@@ -2,7 +2,7 @@
 
 namespace Homechef.Web.Controllers
 {
-    public class ClientController:  BaseController
+    public class CustomerController:  BaseController
     {
        public ActionResult Home()
         {

@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chef_data.cs" />
-    <Compile Include="Client_data.cs" />
+    <Compile Include="Customer_data.cs" />
     <Compile Include="Menu_data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User_data.cs" />

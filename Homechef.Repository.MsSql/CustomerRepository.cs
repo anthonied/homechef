@@ -6,36 +6,36 @@ using System.Linq;
 
 namespace Homechef.Repository.MsSql
 {
-   public class ClientRepository: RepositoryBase
+   public class CustomerRepository: RepositoryBase
     {
-        public void Create(Client client)
+        public void Create(Customer customer)
         {
             var sql = @" IF  EXISTS (SELECT 1 FROM [user] WHERE email = @email)
         BEGIN
                 DECLARE @userid int
 				SELECT @userid =id FROM [user] where email = @email
                
-              IF NOT EXISTS (SELECT 1 FROM client WHERE user_id= @userid)
+              IF NOT EXISTS (SELECT 1 FROM customer WHERE user_id= @userid)
 
             BEGIN  
-                 INSERT INTO client
+                 INSERT INTO customer
                      (firstname,lastname,idnumber,mobile,user_id)
                     VALUES 
                      (@firstname,@lastname,@idnumber,@mobile,@userid)
             END
        END";
 
-            var data = Client_data.FromDomain(client);
+            var data = Customer_data.FromDomain(customer);
             _db.Execute(sql, data);
         }
 
-        //public Client CheckClientbyuser_id(int id)
+        //public Customer CheckCustomerbyuser_id(int id)
         //{
-        //    var sql = @"SELECT id,user_id FROM chef where user_id = @id ";
+        //    var sql = @"SELECT id,user_id FROM customer where user_id = @id ";
 
-        //    var client = _db.Query<Client_data>(sql, new { id }).FirstOrDefault();
+        //    var customer = _db.Query<Customer_data>(sql, new { id }).FirstOrDefault();
 
-        //    return client?.ToDomain();
+        //    return customer?.ToDomain();
         //}
     }
 }

@@ -7,7 +7,7 @@ namespace Homechef.Data
     public class Menu_data
     {
         public int id { get; set; }
-        public int chefid { get; set; }
+        public int chef_id { get; set; }
         public string dishname { get; set; }
         public string dishcategory { get; set; }
         public string cuisinetype { get; set; }
@@ -37,7 +37,7 @@ namespace Homechef.Data
             return new Menu_data
             {
               
-                chefid =menu.Chefid,
+                chef_id =menu.Chef_id,
                 dishname =menu.Dishname,
                 dishcategory = menu.Dishcategory,
                 cuisinetype =menu.Cuisinetype,

@@ -121,10 +121,10 @@
             },
             true);
 
-            var chefId = @Html.Raw(Json.Encode(Model));
+            var chef_Id = @Html.Raw(Json.Encode(Model));
             var MenuAddViewModel = function() {
                 var self = this;
-                self.chefId = chefId;
+                self.chef_Id = chef_Id;
                 self.dishname = ko.observable("").extend({ required: true });;
                 self.availableDishCategories = ["Home Food", "Sweets,Cakes,Cookies", "Party Order", "Others"];
                 self.dishcategory = ko.observable("");

@@ -12,7 +12,7 @@ namespace Homechef.Data
         public string idnumber { get; set; }
         public int age { get; set; }
         public string sex { get; set; }
-        public int mobile { get; set; }
+        public string mobile { get; set; }
         public string streetname { get; set; }
         public string suburb { get; set; }
         public string city { get; set; }
@@ -28,7 +28,7 @@ namespace Homechef.Data
         public static Chef_data FromDomain(Chef chef)
         {
             return new Chef_data
-            {
+            {   id =chef.Id,
                 firstname = chef.Firstname,
                 lastname = chef.Lastname,
                 idnumber = chef.Idnumber,

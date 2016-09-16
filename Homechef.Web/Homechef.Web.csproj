@@ -174,7 +174,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChefController.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Models\ChefHomeModel.cs" />
@@ -189,6 +189,7 @@
     <Compile Include="Models\MenuAddModel.cs" />
     <Compile Include="Models\MenuDisplayModel.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
+    <Compile Include="Models\ChefUpdateRegistrationModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -243,7 +244,7 @@
     <Content Include="Views\Chef\Home.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
-    <Content Include="Views\Client\Home.cshtml" />
+    <Content Include="Views\Customer\Home.cshtml" />
     <Content Include="Views\Chef\UpdateRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>

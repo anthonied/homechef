@@ -43,29 +43,31 @@ namespace Homechef.Repository.MsSql
             var chefData = _db.Query<Chef_data>(sql, new {user.Id}).First();
             return toDomain(chefData, user);
         }
-        //public Chef Update()
-        //{
-        //    //UPDATE chef
-        //    //            SET
-        //    //            firstname = @firstname,
-        //    //            lastname = @lastname,
-        //    //            idnumber = @idnumber,
-        //    //            age = @age,
-        //    //            sex = @sex,
-        //    //            mobile = @mobile,
-        //    //            streetname = @streetname,
-        //    //            suburb = @suburb,
-        //    //            city = @city,
-        //    //            province = @province,
-        //    //            postalcode = @postalcode,
-        //    //            country = @country,
-        //    //            chefpicture = @chefpicture,
-        //    //            description = @description
+        public void Update(Chef chef)
+        {
+            var sql = @"UPDATE chef
+                        SET
+                        firstname = @firstname,
+                        lastname = @lastname,
+                        idnumber = @idnumber,
+                        age = @age,
+                        sex = @sex,
+                        mobile = @mobile,
+                        streetname = @streetname,
+                        suburb = @suburb,
+                        city = @city,
+                        province = @province,
+                        postalcode = @postalcode,
+                        country = @country,
+                        chefpicture = @chefpicture,
+                        description = @description
 
-        //    //            WHERE
-        //    //            user_id = @userid
-        //    //             ";
-        //}
+                        WHERE
+                        id = @id
+                         ";
+            var data = Chef_data.FromDomain(chef);
+            _db.Execute(sql, data);
+        }
 
         private Chef toDomain(Chef_data chefData, User user)
         {

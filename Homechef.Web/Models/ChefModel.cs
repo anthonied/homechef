@@ -16,7 +16,7 @@ namespace Homechef.Web.Models
         public string Idnumber { get; set; }
         public int Age { get; set; }
         public string Sex { get; set; }
-        public int Mobile { get; set; }
+        public string Mobile { get; set; }
 
         public string Streetname { get; set; }
         public string Suburb { get; set; }

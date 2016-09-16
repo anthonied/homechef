@@ -11,7 +11,7 @@ namespace Homechef.Domain
     public class Menu
     {
         public int Id { get; set; }
-        public int Chefid { get; set; }
+        public int Chef_id { get; set; }
         
         public string Dishname { get; set; }
         public string Dishcategory { get; set; }
