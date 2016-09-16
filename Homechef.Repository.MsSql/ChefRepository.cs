@@ -25,7 +25,7 @@ namespace Homechef.Repository.MsSql
        END";
 
             var data = Chef_data.FromDomain(chef);
-             _db.Execute(sql, data);
+            _db.Execute(sql, data);
         }
 
         public Chef CheckChefbyuser_id(int id)

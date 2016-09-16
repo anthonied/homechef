@@ -4,11 +4,12 @@
 }
 <style>
     .validationMessage {
-    color: #f00;
-}
-.customMessage {
-    color: #FFA500;
-}
+        color: #f00;
+    }
+
+    .customMessage {
+        color: #FFA500;
+    }
 </style>
 <h2>Chef Registration</h2>
 <div id="chefregistration">
@@ -29,11 +30,11 @@
             <label>Age</label>
             <input type="text" class="form-control" placeholder="Age" data-bind="value: age">
         </div>
-       
+
         <div class="form-group">
             <label>Sex</label>
-            <input type="radio" name ="checkgender" value ="Female" data-bind="checked:sex " />Female
-            <input type="radio" name ="checkgender" value="Male" data-bind="checked:sex" />Male
+            <input type="radio" name="checkgender" value="Female" data-bind="checked:sex " />Female
+            <input type="radio" name="checkgender" value="Male" data-bind="checked:sex" />Male
         </div>
         <div class="form-group">
             <label>Mobile Number</label>
@@ -71,7 +72,14 @@
             <label>Chef Description</label>
             <input type="text" class="form-control" placeholder="Description" data-bind="value: description">
         </div>
-        
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="text" class="form-control" placeholder="Email Address" data-bind="value: email">
+        </div>
+        <div class="form-group">
+            <label>Password for your Account</label>
+            <input type="text" class="form-control" placeholder="Password" data-bind="value: password">
+        </div>
         <button data-bind="click: submit" class="btn btn-default">Submit</button>
     </form>
 
@@ -88,20 +96,19 @@
                 messageTemplate: null
             },
             true);
-        var model = @Html.Raw(Json.Encode(Model));
-        
+
         var ChefRegistrationViewModel = function() {
             var self = this;
-            self.firstname = ko.observable(model.Firstname).extend({ required: true });
-            self.lastname = ko.observable(model.Lastname).extend({ required: true });
-            self.idnumber = ko.observable(model.Idnumber).extend({ required: true });
-            self.age = ko.observable(model.Age)
+            self.firstname = ko.observable("").extend({ required: true });
+            self.lastname = ko.observable("").extend({ required: true });
+            self.idnumber = ko.observable("").extend({ required: true });
+            self.age = ko.observable("")
                 .extend({
                     required: true,
                     number: true
                 });
-            self.sex = ko.observable(model.Sex);
-            self.mobile = ko.observable(model.Mobile)
+            self.sex = ko.observable("");
+            self.mobile = ko.observable("")
                 .extend({
                     required: true,
                     pattern: {
@@ -109,15 +116,18 @@
                         params: /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/
                     }
                 });
-            self.streetname = ko.observable(model.Streetname).extend({ required: true });
-            self.suburb = ko.observable(model.Suburb).extend({ required: true });
-            self.city = ko.observable(model.City).extend({ required: true });
-            self.province = ko.observable(model.Province).extend({ required: true });
-            self.postalcode = ko.observable(model.Postalcode);
-            self.country = ko.observable(model.Country).extend({ required: true });
+            self.streetname = ko.observable("").extend({ required: true });
+            self.suburb = ko.observable("").extend({ required: true });
+            self.city = ko.observable("").extend({ required: true });
+            self.province = ko.observable("").extend({ required: true });
+            self.postalcode = ko.observable("");
+            self.country = ko.observable("").extend({ required: true });
             self.chefpicture = ko.observable("");
-            self.description = ko.observable(model.description);
-           
+            self.description = ko.observable("");
+            self.email = ko.observable("").extend({ required: true, email: true });
+            self.password = ko.observable("").extend({ required: true });
+
+
             self.submit = function() {
                 console.log(self.errors());
                 if (self.errors().length === 0) {
@@ -133,7 +143,7 @@
                                 alert("Done");
                             }
                         });
-                
+
                 //         console.log("correct");
             } else
             {

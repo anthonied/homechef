@@ -244,6 +244,7 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Client\Home.cshtml" />
+    <Content Include="Views\Chef\UpdateRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
