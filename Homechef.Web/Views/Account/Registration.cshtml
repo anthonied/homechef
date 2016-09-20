@@ -1,4 +1,13 @@
-﻿<div>
+﻿<style>
+    .validationMessage {
+        color: #f00;
+    }
+
+    .customMessage {
+        color: #FFA500;
+    }
+</style>
+<div>
     <h2>User Registration</h2>
     <div id="userregistration">
         <form onsubmit="return false">
@@ -27,27 +36,51 @@
 @section scripts
 {
     <script>
+        ko.validation.init({
+                registerExtenders: true,
+                messagesOnModified: true,
+                insertMessages: true,
+                parseInputAttributes: true,
+                messageTemplate: null
+            },
+            true);
         var UserRegistrationViewModel = function() {
             var self = this;
-            self.email = ko.observable("");
-            self.password = ko.observable("");
-            self.option = ko.observable("");
+            self.email = ko.observable("").extend({ required: true, email: true });
+            self.password = ko.observable("")
+                .extend({
+                    required: true,
+                    minLength: 6,
+                    maxLength: 12
+                    
+                });
+            self.option = ko.observable("").extend({ required: true });
             self.submit = function() {
-                sendViewModelToController("Account/Createuser",
-                    ko.toJSON(self),
-                    function(response) {
-                        if (!response) {
-                            alert("Please use another email..An account with this email address already created");
+                console.log(self.errors());
+                if (self.errors().length === 0) {
+                    sendViewModelToController("Account/Createuser",
+                        ko.toJSON(self),
+                        function(response) {
+                            if (!response) {
+                                alert("Please use another email..An account with this email address already created");
 
-                            return;
-                        }
-                        {
-                            alert("Done");
-                        }
-                    });
+                                return;
+                            }
+                            {
+                                alert("Done");
+                            }
+                        });
+                } else {
+                    self.errors.showAllMessages();
+                }
             }
 
         }
-        ko.applyBindings(new UserRegistrationViewModel(), document.getElementById(userregistration));
+
+        var viewModel = new UserRegistrationViewModel();
+        viewModel.errors = ko.validation.group(viewModel);
+
+        ko.applyBindings(viewModel, document.getElementById(userregistration));
+
     </script>
 }

@@ -29,6 +29,42 @@ namespace Homechef.Repository.MsSql
             _db.Execute(sql, data);
         }
 
+        public Customer GetByUser(User user)
+        {
+            var sql = "SELECT A.*,B.email from customer A,[user] B where A.user_id = @Id AND B.id = @Id";
+
+            var customerData = _db.Query<Customer_data>(sql, new { user.Id }).First();
+            return toDomain(customerData, user);
+        }
+
+        private Customer toDomain(Customer_data customerData, User user)
+        {
+            return new Customer
+            {
+                Id = customerData.id,
+                Firstname = customerData.firstname,
+                Lastname = customerData.lastname,
+                Idnumber = customerData.idnumber,
+                Mobile = customerData.mobile,
+                Email = user.Email,
+
+            };
+        }
+
+        public void Update(Customer customer)
+        {
+            var sql = @"UPDATE customer
+                        SET
+                        firstname = @firstname,
+                        lastname = @lastname,
+                        idnumber = @idnumber,
+                        mobile = @mobile
+                         WHERE
+                        id = @id
+                         ";
+            var data = Customer_data.FromDomain(customer);
+            _db.Execute(sql, data);
+        }
         //public Customer CheckCustomerbyuser_id(int id)
         //{
         //    var sql = @"SELECT id,user_id FROM customer where user_id = @id ";

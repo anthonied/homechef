@@ -16,6 +16,7 @@ namespace Homechef.Data
         {
             return new Customer_data
             {
+                id = customer.Id,
                 firstname = customer.Firstname,
                 lastname = customer.Lastname,
                 idnumber = customer.Idnumber,
@@ -24,17 +25,17 @@ namespace Homechef.Data
             };
         }
 
-        public Customer ToDomain()
-        {
-            return new Customer
-            {
-                Id = id,
-                Firstname =firstname,
-                Lastname = lastname,
-                Idnumber = idnumber,
-                Mobile = mobile,
+        //public Customer ToDomain()
+        //{
+        //    return new Customer
+        //    {
+        //        Id = id,
+        //        Firstname =firstname,
+        //        Lastname = lastname,
+        //        Idnumber = idnumber,
+        //        Mobile = mobile,
 
-            };
-        }
+        //    };
+        //}
     }
 }

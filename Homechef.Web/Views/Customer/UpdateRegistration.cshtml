@@ -1,0 +1,82 @@
+﻿
+<h2>Update Customer Details</h2>
+<div id="customerregistration">
+    <form onsubmit="return false">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" data-bind="value: firstname">
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" data-bind="value: lastname">
+        </div>
+        <div class="form-group">
+            <label>ID Number or Passport Number </label>
+            <input type="text" class="form-control" placeholder="ID Number" data-bind="value: idnumber">
+        </div>
+       
+        <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="text" class="form-control" placeholder="Mobile Number" data-bind="value: mobile">
+        </div>
+        <button data-bind="click: submit" class="btn btn-default">Submit</button>
+    </form>
+
+</div>
+@section scripts
+{
+    <script>
+
+        ko.validation.init({
+                registerExtenders: true,
+                messagesOnModified: true,
+                insertMessages: true,
+                parseInputAttributes: true,
+                messageTemplate: null
+            },
+            true);
+var model = @Html.Raw(Json.Encode(Model));
+        var id = model.Id;
+        var CustomerRegistrationViewModel = function() {
+            var self = this;
+           self.id = id;
+            self.firstname = ko.observable(model.Firstname).extend({ required: true });
+            self.lastname = ko.observable(model.Lastname).extend({ required: true });
+            self.idnumber = ko.observable(model.Idnumber).extend({ required: true });
+            self.mobile = ko.observable(model.Mobile)
+                .extend({
+                    required: true,
+                    pattern: {
+                        message: 'Invalid mobile number.',
+                        params: /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/
+                    }
+                });
+
+            self.submit = function() {
+                console.log(self.errors());
+                if (self.errors().length === 0) {
+                    sendViewModelToController("Customer/Update",
+                        ko.toJSON(self),
+                        function() {
+                                alert("Done");
+                                changeLocation("Customer/Home", true);
+
+                        });
+
+
+            } else
+            {
+
+                self.errors.showAllMessages();
+            }
+        };
+    }
+
+        var viewModel = new CustomerRegistrationViewModel();
+        viewModel.errors = ko.validation.group(viewModel);
+        ko.applyBindings(viewModel,
+            document.getElementById("customerregistration"));
+
+    </script>
+
+}
