@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homechef.Web", "Homechef.Web\Homechef.Web.csproj", "{2D2BAC2E-53A2-406A-BBA9-6740B38D7470}"
 EndProject
@@ -10,6 +10,26 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homechef.Domain", "Homechef.Domain\Homechef.Domain.csproj", "{81BDA638-EA85-4E94-924D-5F0199FD966F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homechef.Repository.MsSql", "Homechef.Repository.MsSql\Homechef.Repository.MsSql.csproj", "{990A374F-96D5-4D83-BB86-DA8BFB035C63}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "cakefactory", "cakefactory\", "{B1E110CB-C216-43F4-85C6-31BF6C5377E4}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51459"
+		Debug.AspNetCompiler.PhysicalPath = "cakefactory\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51459\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51459"
+		Release.AspNetCompiler.PhysicalPath = "cakefactory\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51459\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "51459"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +53,10 @@ Global
 		{990A374F-96D5-4D83-BB86-DA8BFB035C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{990A374F-96D5-4D83-BB86-DA8BFB035C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{990A374F-96D5-4D83-BB86-DA8BFB035C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E110CB-C216-43F4-85C6-31BF6C5377E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E110CB-C216-43F4-85C6-31BF6C5377E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E110CB-C216-43F4-85C6-31BF6C5377E4}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E110CB-C216-43F4-85C6-31BF6C5377E4}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
