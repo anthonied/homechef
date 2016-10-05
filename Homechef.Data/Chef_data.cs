@@ -23,6 +23,7 @@ namespace Homechef.Data
         public string description { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public string completeregistration { get; set; }
 
 
         public static Chef_data FromDomain(Chef chef)
@@ -43,7 +44,8 @@ namespace Homechef.Data
                 country = chef.Country,
                 chefpicture = chef.Chefpicture,
                 description = chef.Description,
-                email = chef.Email
+                email = chef.Email,
+                completeregistration = chef.Completeregistration
             };
         }
 
@@ -68,6 +70,7 @@ namespace Homechef.Data
                 Country = country,
                 Chefpicture = chefpicture,
                 Description = description,
+                Completeregistration = completeregistration
 
 
 

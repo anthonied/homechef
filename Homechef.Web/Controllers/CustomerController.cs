@@ -10,8 +10,17 @@ namespace Homechef.Web.Controllers
     {
         public ActionResult Home()
         {
-            return View();
+            using (var customerRepo = new CustomerRepository())
+            using (var menurepo = new MenuRepository())
+            {
+                var model = new CustomerHomeModel();
+                var customer = customerRepo.GetByUser(User);
+                model.Customer = CustomerModel.FromDomain(customer);
 
+                var menus = menurepo.GetAllActiveMenu();
+                model.Menus = menus.Select(MenuDisplayModel.FromDomain).ToList();
+                return View(model);
+            }
         }
 
         public ActionResult UpdateRegistration()

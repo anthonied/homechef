@@ -37,6 +37,16 @@ namespace Homechef.Web.Controllers
 
 
         }
+        public ActionResult ChefList()
+        {
+            using (var chefRepo = new ChefRepository())
+            {   var model =new ChefListModel();
+                var chef = chefRepo.ListChefHavingActiveMenu();
+                model.Chef = chef.Select(ChefModel.FromDomain).ToList();
+                return View(model);
+            }
+
+        }
 
         public ActionResult Home()
         {

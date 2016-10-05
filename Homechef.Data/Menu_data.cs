@@ -7,6 +7,7 @@ namespace Homechef.Data
     public class Menu_data
     {
         public int id { get; set; }
+        public string chefname { get; set; }
         public int chef_id { get; set; }
         public string dishname { get; set; }
         public string dishcategory { get; set; }

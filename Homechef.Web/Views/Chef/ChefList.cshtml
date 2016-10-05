@@ -1,0 +1,62 @@
+﻿
+
+<div id="chefs" class="row,collapse in" data-bind="foreach: chefs">
+    <div class="col-sm-3 col-md-3">
+        <div class="thumbnail text-center ">
+
+          
+            <div class="caption">
+                <p>
+                    <label>Home Munch Chef</label>
+                    <span data-bind="text: chefName"> </span>
+                </p>
+                <span data-bind="text: description"></span>
+                <img src="http://localhost:52990/Content/Images/Menus/21.jpg" alt="Image">
+
+                <p>
+                    <label> Address:</label>
+                    <span data-bind="text: city+' '+province"> </span>
+                    <span data-bind="text: id"> </span>
+                    </p>
+                <p>
+                    <a href="#" class="btn btn-primary" role="button" data-bind=" click: viewAllMenus">View Menus</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+
+        var model = @Html.Raw(Json.Encode(Model));
+
+        var ChefsViewModel = function() {
+            var self = this;
+            self.chefs = ko.utils.arrayMap(model.Chef,
+                function(chef) {
+                    return new ChefViewModel(chef);
+                });
+
+        };
+
+
+        ChefViewModel = function(chef) {
+            var self = this;
+            self.id = chef.Id;
+            self.chefName = chef.Firstname;
+            self.description = chef.Description;
+            self.city = chef.City;
+            self.province = chef.Province;
+            self.viewAllMenus = function() {
+                alert(self.chefName);
+                alert(self.id);
+            };
+        };
+
+
+        ko.applyBindings(new ChefsViewModel(), document.getElementById("chefs"));
+
+
+    </script>
+}

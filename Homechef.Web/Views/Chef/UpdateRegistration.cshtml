@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
             <label>Province</label>
-            <input type="text" class="form-control" placeholder="Province" data-bind="value: province">
+            <select data-bind="options: availableProvince,value:province, optionsCaption: 'Choose Province...'"></select>
         </div>
         <div class="form-group">
             <label>postalcode</label>
@@ -114,6 +114,7 @@
             self.streetname = ko.observable(model.Streetname).extend({ required: true });
             self.suburb = ko.observable(model.Suburb).extend({ required: true });
             self.city = ko.observable(model.City).extend({ required: true });
+            self.availableProvince = ["Eastern Cape","Free State" ,"Gauteng", "KwaZulu-Natal", "Limpopo", "Mpumalanga", "Northern Cape","North West" ,"Western Cape" ];
             self.province = ko.observable(model.Province).extend({ required: true });
             self.postalcode = ko.observable(model.Postalcode);
             self.country = ko.observable(model.Country).extend({ required: true });
@@ -125,16 +126,10 @@
                 if (self.errors().length === 0) {
                     sendViewModelToController("Chef/Update",
                         ko.toJSON(self),
-                        function(response) {
-                            if (!response) {
-                                alert("Please use another email..A chef  whith this email address already created");
-
-                                return;
-                            }
-                            {
+                        function() {
                                 alert("Done");
                                 changeLocation("Chef/Home", true);
-                            }
+                            
                         });
 
                 //         console.log("correct");

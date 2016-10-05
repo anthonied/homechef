@@ -47,7 +47,7 @@ namespace Homechef.Repository.MsSql
     BEGIN
 
         INSERT INTO [user](email,password)
-                    VALUES(@email,@password)
+                    VALUES(@email,@password)  
                           
     END";
 

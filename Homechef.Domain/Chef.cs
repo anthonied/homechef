@@ -21,6 +21,6 @@ namespace Homechef.Domain
         public string Chefpicture { get; set; }
         public string Description { get; set; }
         public string Email { get; set; }
-
+        public string Completeregistration { get; set; }
     }
 }

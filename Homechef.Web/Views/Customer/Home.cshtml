@@ -1,1 +1,115 @@
-﻿
+﻿<h2>Customer Home Page</h2>
+<div id="customerhome">
+    <div id="buttongroup" class="btn-group btn-group-lg" role="group" aria-label="...">
+        <button type="button" id="updatemydetails" data-bind="click:updatesubmit" class="btn btn-default">Update My Details</button>
+        <button type="button" class="btn btn-default">Right</button>
+    </div>
+
+    <div class="panel panel-primary ">
+        <div class="panel-heading  panel-info">
+            My Details
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-2 col-md-3">
+                    <div class="thumbnail">
+                        <img src="http://localhost:52990/Content/Images/Menus/logo2.png" alt="Image">
+                        <div class="caption">
+                            <div class="form-group">
+                                <label> WELCOME </label>
+                                <span data-bind="text: fullName"> </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+    
+        <div id="buttongroup" class="btn-group btn-group-lg" role="group" aria-label="...">
+            <button type="button" id="viewallchef" data-bind="click:viewallchef" class="btn btn-default">View All Chef</button>
+            <button type="button" id="viewallmenu" data-toggle="collapse" data-target="#menu" data-bind="click:viewallmenu"class="btn btn-default">View All Menu</button>
+          
+        </div>
+
+        <div id ="menu"class="row,collapse in" data-bind="foreach: menus">
+            <div class="col-sm-3 col-md-3">
+                <div class="thumbnail text-center">
+
+                    <div class="caption">
+                        <p><label> From: </label>
+                            <span data-bind="text: chefName"> </span></p>
+                        <span data-bind="text: dishName"></span>
+                        <img src="http://localhost:52990/Content/Images/Menus/21.jpg" alt="Image">
+                        
+                        <p>
+                            <label> Price : </label>
+                            <span data-bind="text: pricePerPortion+' '+currency"> </span><label> Available : </label>
+                            <span data-bind="text: availabilityType"> </span>
+                        </p>
+                        <p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section scripts
+{
+    <script>
+
+        var model = @Html.Raw(Json.Encode(Model));
+        var customername = model.Customer.Fullname;
+        var customerViewModel = function() {
+            var self = this;
+            self.fullName = ko.observable(model.Customer.Fullname);
+            self.menus = ko.utils.arrayMap(model.Menus,
+                function(menu) {
+                    return new MenuViewModel(menu);
+                });
+            
+
+            self.updatesubmit = function() {
+                changeLocation("Customer/UpdateRegistration", true);
+
+            }
+
+        };
+        MenuViewModel = function(menu) {
+            var self = this;
+            self.id = menu.Id;
+            self.dishName = menu.Dishname;
+            self.dishCategory = menu.Dishcategory;
+            self.pricePerPortion = menu.Pricepp;
+            self.currency = menu.Currency;
+            self.takeAway = menu.Takeaway;
+            self.dineInWithChef = menu.Dineinwithchef;
+            self.homeDelivery = menu.Homedelivery;
+            self.availabilityType = menu.Availabilitytype;
+            self.leadTime = menu.Leadtime;
+            self.chefName = menu.Chefname;
+            self.status = ko.observable(menu.Status);
+            //self.viewallmenu = function() {
+            //    document.getElementById('menu').style.display = 'Block';
+            //    document.getElementById('menu').style.display = 'none';
+            //};
+            self.viewDetails = function() {
+              
+                alert(self.chefName);
+                //sendViewModelToController("Menu/ChangeStatus",
+                //    ko.toJSON(self),
+                //    function() {
+                //        alert("Done");
+                //        changeLocation("Chef/Home", true);
+                //    });
+            };
+        };
+       // alert(chefname);
+        ko.applyBindings(new customerViewModel(), document.getElementById("customerhome"));
+
+
+    </script>
+}

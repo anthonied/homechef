@@ -28,6 +28,7 @@ namespace Homechef.Web.Models
         public string Description { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Completeregistration { get; set; }
 
         public Chef ToDomain()
         {
@@ -49,13 +50,14 @@ namespace Homechef.Web.Models
                 Chefpicture=Chefpicture,
                 Description=Description,
                 Email = Email,
+                Completeregistration= Completeregistration
             };
         }
 
         public static ChefModel FromDomain(Chef chef)
         {
             return new ChefModel
-            {
+            {Id = chef.Id,
                 Firstname = chef.Firstname,
                 Lastname = chef.Lastname,
                 Idnumber = chef.Idnumber,
@@ -71,6 +73,7 @@ namespace Homechef.Web.Models
                 Chefpicture = chef.Chefpicture,
                 Description = chef.Description,
                 Email = chef.Email,
+                Completeregistration = chef.Completeregistration,
             };
         }
     }

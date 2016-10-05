@@ -10,8 +10,9 @@ namespace Homechef.Data
         public string idnumber { get; set; }
         public string mobile { get; set; }
         public string email { get; set; }
+        public string completeregistration { get; set; }
 
-        
+
         public static Customer_data FromDomain(Customer customer)
         {
             return new Customer_data

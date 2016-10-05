@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
             <label>Province</label>
-            <input type="text" class="form-control" placeholder="Province" data-bind="value: province">
+            <select data-bind="options: availableProvince,value:province, optionsCaption: 'Choose Province...'"></select>
         </div>
         <div class="form-group">
             <label>postalcode</label>
@@ -119,6 +119,7 @@
             self.streetname = ko.observable("").extend({ required: true });
             self.suburb = ko.observable("").extend({ required: true });
             self.city = ko.observable("").extend({ required: true });
+            self.availableProvince = ["Eastern Cape", "Free State", "Gauteng", "KwaZulu-Natal", "Limpopo", "Mpumalanga", "Northern Cape", "North West", "Western Cape"];
             self.province = ko.observable("").extend({ required: true });
             self.postalcode = ko.observable("");
             self.country = ko.observable("").extend({ required: true });

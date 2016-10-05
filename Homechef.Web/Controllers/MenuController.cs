@@ -28,5 +28,16 @@ namespace Homechef.Web.Controllers
                 };
             }
         }
+        public JsonResult ChangeStatus(MenuStatusUpdateModel menustatusupdateModel)
+        {
+            using (var repo = new MenuRepository())
+            {
+                repo.ChangeStatusbyMenuId(menustatusupdateModel.ToDomain().Id);
+                return new JsonResult
+                {
+                    Data = new { IsOk = true }
+                };
+            }
+        }
     }
 }

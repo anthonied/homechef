@@ -1,80 +1,100 @@
-﻿
-
-<h2>Chef Home Page</h2>
+﻿<h2>Chef Home Page</h2>
 <div id="chefhome">
-    <div class="panel panel-default ">
-        <div class="panel-heading  panel-info">My Details </div>
-        <div class="panel-body">
-            <div class="form-group">
-             
-                <label>Home Chef Name :</label>
-                <span data-bind="text: fullName"> </span>
-            </div>
+    <div id="buttongroup" class="btn-group btn-group-lg" role="group" aria-label="...">
+        <button type="button" id="updatemydetails" data-bind="click:updatesubmit" class="btn btn-default">Update My Details</button>
+        <button type="button" id="addnewmenu" data-bind="click: menusubmit" class="btn btn-default">Add New Menu</button>
+        <button type="button" class="btn btn-default">Right</button>
+    </div>
 
-            <div class="form-group">
-                <label>Address: </label>
-                <span data-bind="text: streetName"> </span>
 
-                <span></span>
-                <span data-bind="text: suburb"> </span>
-                <span data-bind="text: city"> </span>
-                <span data-bind="text: province"> </span>
-                <span data-bind="text: country"> </span>
-            </div>
-            <div class="form-group">
-                <label>About the chef:</label>
-                <span data-bind="text: description"> </span>
-            </div>
-            <button class="btn btn-primary btn-lg" data-bind="click: submit" class="btn btn-default">Add New Menu</button>
+    <div class="panel panel-primary ">
+        <div class="panel-heading  panel-info">
+            My Details
         </div>
-     
-    </div>
-    
-        <h3>My Menu</h3>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
+                    <div class="thumbnail">
+                        <img src="http://localhost:52990/Content/Images/Menus/1.JPEG" alt="Image">
+                        <div class="caption">
+                            <div class="form-group">
+                                <label>Home Chef Name :</label>
+                                <span data-bind="text: fullName"> </span>
+                            </div>
+                            <div class="form-group">
+                                <label>Address: </label>
+                                <span data-bind="text: streetName"> </span>
+                                <span></span>
+                                <span data-bind="text: suburb"> </span>
+                                <span data-bind="text: city"> </span>
+                                <span data-bind="text: province"> </span>
+                                <span data-bind="text: country"> </span>
+                            </div>
+                            <div class="form-group">
+                                <label>About the chef:</label>
+                                <span data-bind="text: description"> </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <table class="table table-striped table-bordered ">
-            <thead class="thead-inverse">
-            <tr>
-                <th>Dish Name</th>
-                <th> Dish Category</th>
-                <th> Price per portion in Rand</th>
-                <th> Take Away</th>
-                <th> Dine in with Chef</th>
-                <th> Home Delivery</th>
-                <th> Availability Type</th>
-                <th> Order Before(In Hours)</th>
-                <th> Status</th>
-            </tr>
-            </thead>
-            <tbody data-bind="foreach: menus">
-            <tr>
-                <td data-bind="text:Dishname"></td>
-                <td data-bind="text:Dishcategory"></td>
-                <td data-bind="text:Pricepp"></td>
-                <td style="text-align: center"> 
-                    <input type="checkbox" data-bind="checked: Takeaway" disabled>
-                   </td>
-                <td style="text-align: center">
-                    <input type="checkbox" data-bind="checked: Dineinwithchef" disabled>
-                </td>
-                <td style="text-align: center">
-                    <input type="checkbox" data-bind="checked: Homedelivery" disabled>
-                </td>
-               
-                <td data-bind="text:Availabilitytype"></td>
-                <td data-bind="text:Leadtime"></td>
-                <td data-bind="text:Status"></td>
-              </tr>
-            </tbody>
+        </div>
 
-        </table>
     </div>
+
+    <h3>My Menu</h3>
+
+    <table class="table table-striped table-bordered ">
+        <thead class="thead-inverse">
+        <tr>
+            <th>Dish Name</th>
+            <th> Dish Category</th>
+            <th> Price per portion in Rand</th>
+            <th> Take Away</th>
+            <th> Dine in with Chef</th>
+            <th> Home Delivery</th>
+            <th> Availability Type</th>
+            <th> Order Before(In Hours)</th>
+            <th> Status</th>
+            <th> Action</th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: menus">
+        <tr>
+            <td data-bind="text:dishName"></td>
+            <td data-bind="text:dishCategory"></td>
+            <td data-bind="text:pricePerPortion"></td>
+            <td style="text-align: center">
+                <input type="checkbox" data-bind="checked: takeAway" disabled>
+            </td>
+            <td style="text-align: center">
+                <input type="checkbox" data-bind="checked: dineInWithChef" disabled>
+            </td>
+            <td style="text-align: center">
+                <input type="checkbox" data-bind="checked: homeDelivery" disabled>
+            </td>
+
+            <td data-bind="text:availabilityType"></td>
+            <td data-bind="text:leadTime"></td>
+            <td data-bind="text:status"></td>
+            <td>
+                <button class="btn btn-default" data-bind="text: editButtonText, click: edit"></button>
+            </td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
 
 @section scripts
 {
     <script>
 
         var model = @Html.Raw(Json.Encode(Model));
+        var completeregistration = model.Chef.Completeregistration;
         var chefViewModel = function() {
             var self = this;
             self.fullName = ko.observable(model.Chef.Fullname);
@@ -85,17 +105,59 @@
             self.province = ko.observable(model.Chef.Province);
             self.country = ko.observable(model.Chef.Country);
             self.description = ko.observable(model.Chef.Description);
-            self.menus = model.Menus;
-
-            self.submit = function() {
-
-                changeLocation("Menu/Add", true);
+            self.menus = ko.utils.arrayMap(model.Menus,
+                function(menu) {
+                    return new MenuViewModel(menu);
+                });
+            document.getElementById("addnewmenu").disabled = true;
+            if (completeregistration == "Yes") {
+                document.getElementById("addnewmenu").disabled = false;
             }
 
-        }
-        ko.applyBindings(new chefViewModel(), document.getElementById("chefhome"));
+            self.updatesubmit = function() {
+                changeLocation("Chef/UpdateRegistration", true);
 
-        
+            }
+            self.menusubmit = function() {
+                changeLocation("Menu/Add", true);
+
+            }
+
+        };
+       
+
+       MenuViewModel = function(menu) {
+            var self = this;
+            self.id = menu.Id;
+            self.dishName = menu.Dishname;
+            self.dishCategory = menu.Dishcategory;
+            self.pricePerPortion = menu.Pricepp;
+            self.takeAway = menu.Takeaway;
+            self.dineInWithChef = menu.Dineinwithchef;
+            self.homeDelivery = menu.Homedelivery;
+            self.availabilityType = menu.Availabilitytype;
+            self.leadTime = menu.Leadtime;
+            self.status = ko.observable(menu.Status);
+
+            self.editButtonText = ko.computed(function() {
+                    return self.status() === "Active" ? "DeActivate" : "Activate";
+                },
+                self);
+
+            self.edit = function() {
+                //var chefId = model.Chef.ChefId;
+                
+                sendViewModelToController("Menu/ChangeStatus",
+                    ko.toJSON(self),
+                    function() {
+                        alert("Done");
+                        changeLocation("Chef/Home", true);
+                    });
+            };
+        };
+
+
+       ko.applyBindings(new chefViewModel(), document.getElementById("chefhome"));
+
     </script>
 }
-

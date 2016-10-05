@@ -27,13 +27,6 @@ namespace Homechef.Web.Controllers
 
             return View();
         }
-        public ActionResult Home()
-        {
-            using (var chefRepo = new ChefRepository())
-            {
-                var chef = chefRepo.GetByUser(User);
-                return View(chef);
-            }
-        }
+        
     }
 }

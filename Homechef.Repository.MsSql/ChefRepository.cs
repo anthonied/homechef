@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Dapper;
 using Homechef.Domain;
 using Homechef.Data;
@@ -18,9 +19,9 @@ namespace Homechef.Repository.MsSql
 
             BEGIN  
                  INSERT INTO chef
-                     (firstname,lastname,idnumber,age,sex,mobile,streetname,suburb,city,province,postalcode,country,chefpicture,description,user_id)
+                     (firstname,lastname,idnumber,age,sex,mobile,streetname,suburb,city,province,postalcode,country,chefpicture,description,user_id,completeregistration)
                     VALUES 
-                     (@firstname,@lastname,@idnumber,@age,@sex,@mobile,@streetname,@suburb,@city,@province,@postalcode,@country,@chefpicture,@description,@userid)
+                     (@firstname,@lastname,@idnumber,@age,@sex,@mobile,@streetname,@suburb,@city,@province,@postalcode,@country,@chefpicture,@description,@userid,'No')
             END
        END";
 
@@ -41,7 +42,7 @@ namespace Homechef.Repository.MsSql
             var sql = "SELECT A.*,B.email from chef A,[user] B where A.user_id = @Id AND B.id = @Id";
 
             var chefData = _db.Query<Chef_data>(sql, new {user.Id}).First();
-            return toDomain(chefData, user);
+            return ToDomain(chefData);
         }
         public void Update(Chef chef)
         {
@@ -60,7 +61,8 @@ namespace Homechef.Repository.MsSql
                         postalcode = @postalcode,
                         country = @country,
                         chefpicture = @chefpicture,
-                        description = @description
+                        description = @description,
+                        completeregistration='Yes'
 
                         WHERE
                         id = @id
@@ -68,8 +70,17 @@ namespace Homechef.Repository.MsSql
             var data = Chef_data.FromDomain(chef);
             _db.Execute(sql, data);
         }
-
-        private Chef toDomain(Chef_data chefData, User user)
+        public List<Chef> ListChefHavingActiveMenu()
+        {
+            var sql = @"	select A.* ,B.email from chef A,[user] B where
+						A.user_id =B.id
+						and 
+						A.id in (select chef_id from menu where status ='Active')";
+            var chefData = _db.Query<Chef_data>(sql).ToList();
+            return chefData.Select(ToDomain).ToList();
+        }
+        
+        private Chef ToDomain(Chef_data chefData)
         {
             return new Chef
             {
@@ -88,7 +99,8 @@ namespace Homechef.Repository.MsSql
                 Country = chefData.country,
                 Chefpicture =chefData.chefpicture,
                 Description =chefData.description,
-                Email = user.Email,
+                Completeregistration =chefData.completeregistration,
+                Email = chefData.email,
        
     };
         }

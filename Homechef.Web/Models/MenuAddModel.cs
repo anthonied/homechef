@@ -56,37 +56,38 @@ namespace Homechef.Web.Models
                 Orderminimum = Orderminimum,
                 Ordermaximum = Ordermaximum,
                 Leadtime = Leadtime,
+                Status =Status,
             };
         }
 
-        public static MenuAddModel FromDomain(Menu menu)
-        {
-            return new MenuAddModel
-            {
-                Chef_Id =  menu.Chef_id,
-                Dishname = menu.Dishname,
-                Dishcategory = menu.Dishcategory,
-                Cuisinetype = menu.Cuisinetype,
-                Pricepp = menu.Pricepp,
-                Currency = menu.Currency,
-                Description = menu.Description,
-                Dishimage = menu.Dishimage,
-                Takeaway = menu.CanOrderAsTakeaway,
-                Dineinwithchef = menu.CanOrderAsDineinwithchef,
-                Homedelivery = menu.CanOrderAsHomedelivery,
-                Availabilitytype = menu.Availabilitytype,
-                Availableonmonday = menu.Availableonmonday,
-                Availableontuesday = menu.Availableontuesday,
-                Availableonwednesday = menu.Availableonwednesday,
-                Availableonthursday = menu.Availableonthursday,
-                Availableonfriday = menu.Availableonfriday,
-                Availableonsaturday = menu.Availableonsaturday,
-                Availableonsunday = menu.Availableonsunday,
-                Orderminimum = menu.Orderminimum,
-                Ordermaximum = menu.Ordermaximum,
-                Leadtime = menu.Leadtime,
-            };
+        //public static MenuAddModel FromDomain(Menu menu)
+        //{
+        //    return new MenuAddModel
+        //    {
+        //        Chef_Id =  menu.Chef_id,
+        //        Dishname = menu.Dishname,
+        //        Dishcategory = menu.Dishcategory,
+        //        Cuisinetype = menu.Cuisinetype,
+        //        Pricepp = menu.Pricepp,
+        //        Currency = menu.Currency,
+        //        Description = menu.Description,
+        //        Dishimage = menu.Dishimage,
+        //        Takeaway = menu.CanOrderAsTakeaway,
+        //        Dineinwithchef = menu.CanOrderAsDineinwithchef,
+        //        Homedelivery = menu.CanOrderAsHomedelivery,
+        //        Availabilitytype = menu.Availabilitytype,
+        //        Availableonmonday = menu.Availableonmonday,
+        //        Availableontuesday = menu.Availableontuesday,
+        //        Availableonwednesday = menu.Availableonwednesday,
+        //        Availableonthursday = menu.Availableonthursday,
+        //        Availableonfriday = menu.Availableonfriday,
+        //        Availableonsaturday = menu.Availableonsaturday,
+        //        Availableonsunday = menu.Availableonsunday,
+        //        Orderminimum = menu.Orderminimum,
+        //        Ordermaximum = menu.Ordermaximum,
+        //        Leadtime = menu.Leadtime,
+        //    };
 
-        }
+        //}
     }
 }
