@@ -70,7 +70,8 @@
         </div>
         <div class="form-group">
             <label>Chef Description</label>
-            <input type="text" class="form-control" placeholder="Description" data-bind="value: description">
+            <textarea rows="3" class="form-control" placeholder="Description" data-bind="value: description"></textarea>
+           
         </div>
 
         <button data-bind="click: submit" class="btn btn-default">Submit</button>
@@ -119,7 +120,7 @@
             self.postalcode = ko.observable(model.Postalcode);
             self.country = ko.observable(model.Country).extend({ required: true });
             self.chefpicture = ko.observable("");
-            self.description = ko.observable(model.description);
+            self.description = ko.observable(model.Description);
 
             self.submit = function() {
                 console.log(self.errors());
@@ -129,6 +130,7 @@
                         function() {
                                 alert("Done");
                                 changeLocation("Chef/Home", true);
+                                
                             
                         });
 

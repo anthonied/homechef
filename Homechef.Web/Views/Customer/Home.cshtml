@@ -1,61 +1,110 @@
 ﻿<h2>Customer Home Page</h2>
 <div id="customerhome">
-    <div id="buttongroup" class="btn-group btn-group-lg" role="group" aria-label="...">
-        <button type="button" id="updatemydetails" data-bind="click:updatesubmit" class="btn btn-default">Update My Details</button>
-        <button type="button" class="btn btn-default">Right</button>
-    </div>
-
-    <div class="panel panel-primary ">
-        <div class="panel-heading  panel-info">
-            My Details
+    <div class="col-md-12">
+        <div id="buttongroup" class="btn-group btn-group-lg" role="group" aria-label="...">
+            <button type="button" id="updatemydetails" data-bind="click:updatesubmit" class="btn btn-default">Update My Details</button>
+            <button type="button" class="btn btn-default">Right</button>
         </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-2 col-md-3">
-                    <div class="thumbnail">
-                        <img src="http://localhost:52990/Content/Images/Menus/logo2.png" alt="Image">
+
+        <div class="panel panel-primary ">
+            <div class="panel-heading  panel-info">
+                My Details
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-2 col-md-3">
+                        <div class="thumbnail">
+                            <img src="http://localhost:52990/Content/Images/Menus/home munch 4.jpg" alt="Image">
+                            <div class="caption">
+                                <div class="form-group">
+                                    <label> WELCOME </label>
+
+                                    <span data-bind="text: fullName"> </span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="buttongroup" class="btn-group btn-group-lg" role="group" aria-label="...">
+            <button type="button" id="viewallchef" data-bind="click:viewallchef" class="btn btn-default">View All Chef</button>
+            <button type="button" id="viewallmenu" data-toggle="collapse" data-target="#menu" data-bind="click:viewallmenu" class="btn btn-default">View All Menu</button>
+
+        </div>
+
+
+    </div>
+   
+    <div class="col-md-12" >
+        <div class="col-md-10" style="background-color: red">
+            <div id="menu" class="row,collapse in" data-bind="foreach: menus">
+                <div class="col-sm-3 col-md-3" style="position: relative">
+                    <div class="thumbnail text-center">
                         <div class="caption">
-                            <div class="form-group">
-                                <label> WELCOME </label>
-                                <span data-bind="text: fullName"> </span>
+                            <p>
+                                <label> From: </label>
+                                <span data-bind="text: chefName"> </span>
+                            </p>
+                            <span style="position: absolute; top: 50px" class="label label-pill label-success"><span data-bind="text: dishName"></span></span>
+
+                            <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 100%;" alt="Image">
+
+                            <div style="height: 50px; width: 100%;margin-top: 3px;">
+                                <label> Price : </label>
+                                <span data-bind="text: pricePerPortion+' '+currency"> </span>
+                            </div>
+                            <div style="height: 50px; width: 100%; margin-top: 3px;">
+                                <label> Available : </label>
+
+                                <span data-bind="text: availabilityType"> </span>
                             </div>
 
+                            <p>
+                                
+                            </p>
+                            @*<p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>*@
+
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind=" click: $parent.viewDetails">View Details</button>
+
+
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-2">
 
         </div>
     </div>
-   
-    
-        <div id="buttongroup" class="btn-group btn-group-lg" role="group" aria-label="...">
-            <button type="button" id="viewallchef" data-bind="click:viewallchef" class="btn btn-default">View All Chef</button>
-            <button type="button" id="viewallmenu" data-toggle="collapse" data-target="#menu" data-bind="click:viewallmenu"class="btn btn-default">View All Menu</button>
-          
-        </div>
+        
 
-        <div id ="menu"class="row,collapse in" data-bind="foreach: menus">
-            <div class="col-sm-3 col-md-3">
-                <div class="thumbnail text-center">
-
-                    <div class="caption">
-                        <p><label> From: </label>
-                            <span data-bind="text: chefName"> </span></p>
-                        <span data-bind="text: dishName"></span>
-                        <img src="http://localhost:52990/Content/Images/Menus/21.jpg" alt="Image">
-                        
-                        <p>
-                            <label> Price : </label>
-                            <span data-bind="text: pricePerPortion+' '+currency"> </span><label> Available : </label>
-                            <span data-bind="text: availabilityType"> </span>
-                        </p>
-                        <p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>
-                        </p>
-                    </div>
+    <div class="modal fade" id="showmodel" role="dialog">
+        <div class="modal-dialog" data-bind="with: selectedMenuItem">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="label label-pill label-success"><span data-bind="text: dishName"></span></span></h4>
+                </div>
+                <div class="modal-body" for="menu">
+                    <p>
+                        Some text in the modal.
+                        <span data-bind="text:modeldishName"> </span>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
+
         </div>
+    </div>
     </div>
 @section scripts
 {
@@ -71,11 +120,19 @@
                     return new MenuViewModel(menu);
                 });
             
-
+            
             self.updatesubmit = function() {
                 changeLocation("Customer/UpdateRegistration", true);
 
             }
+
+            self.selectedMenuItem = ko.observable();
+            self.viewDetails = function(data) {
+                self.selectedMenuItem(data);
+
+                $('#showmodel').modal('show');
+                //alert(modeldishName);
+            };
 
         };
         MenuViewModel = function(menu) {
@@ -92,20 +149,9 @@
             self.leadTime = menu.Leadtime;
             self.chefName = menu.Chefname;
             self.status = ko.observable(menu.Status);
-            //self.viewallmenu = function() {
-            //    document.getElementById('menu').style.display = 'Block';
-            //    document.getElementById('menu').style.display = 'none';
-            //};
-            self.viewDetails = function() {
-              
-                alert(self.chefName);
-                //sendViewModelToController("Menu/ChangeStatus",
-                //    ko.toJSON(self),
-                //    function() {
-                //        alert("Done");
-                //        changeLocation("Chef/Home", true);
-                //    });
-            };
+            self.modeldishName=menu.Dishname;
+            var dish = menu.Dishname;
+            
         };
        // alert(chefname);
         ko.applyBindings(new customerViewModel(), document.getElementById("customerhome"));
