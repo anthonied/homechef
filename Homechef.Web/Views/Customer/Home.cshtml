@@ -41,7 +41,7 @@
     </div>
    
     <div class="col-md-12" >
-        <div class="col-md-10" style="background-color: red">
+        <div class="col-md-10" style="background-color: lightblue">
             <div id="menu" class="row,collapse in" data-bind="foreach: menus">
                 <div class="col-sm-3 col-md-3" style="position: relative">
                     <div class="thumbnail text-center">
@@ -50,7 +50,7 @@
                                 <label> From: </label>
                                 <span data-bind="text: chefName"> </span>
                             </p>
-                            <span style="position: absolute; top: 50px" class="label label-pill label-success"><span data-bind="text: dishName"></span></span>
+                            <span style="position: absolute; top: 80px" class="label label-pill label-success"><span data-bind="text: dishName"></span></span>
 
                             <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 100%;" alt="Image">
 
@@ -84,21 +84,72 @@
     </div>
         
 
+
+
+    <div id="sendRequestModal" class="modal fade" role="dialog" >
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
     <div class="modal fade" id="showmodel" role="dialog">
         <div class="modal-dialog" data-bind="with: selectedMenuItem">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="label label-pill label-success"><span data-bind="text: dishName"></span></span></h4>
+                    <h4 class="modal-title"><span class="label label-pill label-warning"><span data-bind="text: dishName"></span></span></h4>
                 </div>
                 <div class="modal-body" for="menu">
                     <p>
-                        Some text in the modal.
-                        <span data-bind="text:modeldishName"> </span>
+                        <div class="col-md-12">
+                            <div class="col-md-5" style="background-color: lightsteelblue">
+                                <label>Dish Category :</label><span data-bind="text:dishCategory"> </span>
+                                <div>
+                                    <label>Price : </label><span data-bind="text: pricePerPortion+' '+currency"> </span>
+                                </div>
+                                <div>
+                                    <label>Available : </label><span data-bind="text: availabilityType"> </span>
+                                    <div><label>Order Before : </label><span data-bind="text:leadTime+' '+'Hours'"> </span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 50%;" alt="Image">
+                            </div>
+                          </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3" style="background-color: cadetblue">
+                                <label> Takeaway: </label><input type="checkbox"  data-bind="checked: takeAway" disabled>
+                            </div>
+                            
+                            <div class="col-md-5" style="background-color: cornflowerblue">
+                                 <label> Dine in with the Chef : </label><input type="checkbox" data-bind="checked: dineInWithChef" disabled>
+                            </div>
+                                <div class="col-md-4"style="background-color: dodgerblue">
+                                    <label> Home Delivery: </label><input type="checkbox" data-bind="checked: homeDelivery" disabled>
+                            </div>
+                            
+                        </div>
                     </p>
                 </div>
                 <div class="modal-footer">
+                    <a data-toggle="modal" data-target="#sendRequestModal" class="btn btn-success">Send Request</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -149,7 +200,7 @@
             self.leadTime = menu.Leadtime;
             self.chefName = menu.Chefname;
             self.status = ko.observable(menu.Status);
-            self.modeldishName=menu.Dishname;
+           
             var dish = menu.Dishname;
             
         };
