@@ -1,125 +1,159 @@
-﻿<div class="tab-pane active" id="viewAllMenu">
-    <div class="col-md-12">
-        <div class="col-md-10" style="background-color: lightblue">
-            <div id="menu" class="row,collapse in" data-bind="foreach: menus">
-                <div class="col-sm-3 col-md-3" style="position: relative">
-                    <div class="thumbnail text-center">
+﻿<div id="chefmenu">
+
+    <div class="panel panel-primary ">
+        <div class="panel-heading  panel-info">
+           
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
+                    <div class="thumbnail">
+                        <img src="http://localhost:52990/Content/Images/Chefs/home munch 4.jpg" alt="Image">
                         <div class="caption">
-                            <p>
-                                <label> From: </label>
-                                <span data-bind="text: chefName"> </span>
-                            </p>
-                            <span style="position: absolute; top: 80px" class="label label-pill label-success"><span data-bind="text: dishName"></span></span>
-
-                            <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 100%;" alt="Image">
-
-                            <div style="height: 50px; width: 100%;margin-top: 3px;">
-                                <label> Price : </label>
-                                <span data-bind="text: pricePerPortion+' '+currency"> </span>
+                            <div class="form-group">
+                                <label>Home Chef Name :</label>
+                                <span data-bind="text: fullName"> </span>
                             </div>
-                            <div style="height: 50px; width: 100%; margin-top: 3px;">
-                                <label> Available : </label>
-
-                                <span data-bind="text: availabilityType"> </span>
+                            <div class="form-group">
+                                <label>Address: </label>
+                                <span data-bind="text: streetName"> </span>
+                                <span></span>
+                                <span data-bind="text: suburb"> </span>
+                                <span data-bind="text: city"> </span>
+                                <span data-bind="text: province"> </span>
+                                <span data-bind="text: country"> </span>
                             </div>
-
-                            <p>
-
-                            </p>
-                            @*<p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>*@
-
-                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind=" click: $parent.viewDetails">View Details</button>
-
-
-
+                            <div class="form-group">
+                                <label>About the chef:</label>
+                                <span data-bind="text: description"> </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-2">
 
+        </div>
+
+    </div>
+
+    <div class="tab-pane active" id="viewAllMenu">
+        <div class="col-md-12">
+            <div class="col-md-10" style="background-color: lightblue">
+                <div id="menu" class="row,collapse in" data-bind="foreach: menus">
+                    <div class="col-sm-3 col-md-3" style="position: relative">
+                        <div class="thumbnail text-center">
+                            <div class="caption">
+                                <p>
+                                    <label> From: </label>
+                                    <span data-bind="text: chefName"> </span>
+                                </p>
+                                <span style="position: absolute; top: 80px" class="label label-pill label-success"><span data-bind="text: dishName"></span></span>
+
+                                <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 100%;" alt="Image">
+
+                                <div style="height: 50px; width: 100%;margin-top: 3px;">
+                                    <label> Price : </label>
+                                    <span data-bind="text: pricePerPortion+' '+currency"> </span>
+                                </div>
+                                <div style="height: 50px; width: 100%; margin-top: 3px;">
+                                    <label> Available : </label>
+
+                                    <span data-bind="text: availabilityType"> </span>
+                                </div>
+
+                                <p>
+
+                                </p>
+                                @*<p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>*@
+
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: $parent.viewDetails">View Details</button>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="showmodel" role="dialog">
-    <div class="modal-dialog" data-bind="with: selectedMenuItem">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span class="label label-pill label-warning"><span data-bind="text: dishName"></span></span></h4>
-            </div>
-            <div class="modal-body" for="menu">
-                <p>
-                    <div class="col-md-12">
-                        <div class="col-md-5" style="background-color: lightsteelblue">
-                            <label>Dish Category :</label><span data-bind="text:dishCategory"> </span>
-                            <div>
-                                <label>Price : </label><span data-bind="text: pricePerPortion+' '+currency"> </span>
+    <div class="modal fade" id="modelMenuDetails" role="dialog">
+        <div class="modal-dialog" data-bind="with: selectedMenuItem">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="label label-pill label-warning"><span data-bind="text: dishName"></span></span></h4>
+                </div>
+                <div class="modal-body" for="menu">
+                    <p>
+                        <div class="col-md-12">
+                            <div class="col-md-5" style="background-color: lightsteelblue">
+                                <label>Dish Category :</label><span data-bind="text:dishCategory"> </span>
+                                <div>
+                                    <label>Price : </label><span data-bind="text: pricePerPortion+' '+currency"> </span>
+                                </div>
+                                <div>
+                                    <label>Available : </label><span data-bind="text: availabilityType"> </span>
+                                    <div><label>Order Before : </label><span data-bind="text:leadTime+' '+'Hours'"> </span></div>
+                                </div>
                             </div>
-                            <div>
-                                <label>Available : </label><span data-bind="text: availabilityType"> </span>
-                                <div><label>Order Before : </label><span data-bind="text:leadTime+' '+'Hours'"> </span></div>
+                            <div class="col-md-7">
+                                <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 50%;" alt="Image">
                             </div>
                         </div>
-                        <div class="col-md-7">
-                            <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 50%;" alt="Image">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-3" style="background-color: cadetblue">
-                            <label> Takeaway: </label><input type="checkbox" data-bind="checked: takeAway" disabled>
-                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-3" style="background-color: cadetblue">
+                                <label> Takeaway: </label><input type="checkbox" data-bind="checked: takeAway" disabled>
+                            </div>
 
-                        <div class="col-md-5" style="background-color: cornflowerblue">
-                            <label> Dine in with the Chef : </label><input type="checkbox" data-bind="checked: dineInWithChef" disabled>
-                        </div>
-                        <div class="col-md-4" style="background-color: dodgerblue">
-                            <label> Home Delivery: </label><input type="checkbox" data-bind="checked: homeDelivery" disabled>
-                        </div>
+                            <div class="col-md-5" style="background-color: cornflowerblue">
+                                <label> Dine in with the Chef : </label><input type="checkbox" data-bind="checked: dineInWithChef" disabled>
+                            </div>
+                            <div class="col-md-4" style="background-color: dodgerblue">
+                                <label> Home Delivery: </label><input type="checkbox" data-bind="checked: homeDelivery" disabled>
+                            </div>
 
-                    </div>
-                </p>
+                        </div>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a data-toggle="modal" data-target="#sendRequestModal" class="btn btn-success">Send Request</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <a data-toggle="modal" data-target="#sendRequestModal" class="btn btn-success">Send Request</a>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+
         </div>
-
     </div>
 </div>
 @section scripts
 {
     <script>
 
-        var model = @Html.Raw(Json.Encode(Model));
-       var menuViewModel = function() {
-            var self = this;
-            self.fullName = ko.observable(model.Customer.Fullname);
-            self.menus = ko.utils.arrayMap(model.Menus,
-                function(menu) {
+       var model = @Html.Raw(Json.Encode(Model));
+       var chefMenuViewModel = function() {
+           var self = this;
+           self.fullName = ko.observable(model.Chef.Fullname);
+           self.streetName = ko.observable(model.Chef.Streetname);
+           self.suburb = ko.observable(model.Chef.Suburb);
+           self.city = ko.observable(model.Chef.City);
+           self.province = ko.observable(model.Chef.Province);
+           self.country = ko.observable(model.Chef.Country);
+           self.description = ko.observable(model.Chef.Description);
+           self.menus = ko.utils.arrayMap(model.Menus,
+              function(menu) {
                     return new MenuViewModel(menu);
                 });
 
-
-            self.updatesubmit = function() {
-                changeLocation("Customer/UpdateRegistration", true);
-
-            }
-            self.viewallchef = function() {
-                changeLocation("Chef/ChefList", true);
-
-            }
-
             self.selectedMenuItem = ko.observable();
             self.viewDetails = function(data) {
-                self.selectedMenuItem(data);
-
-                $('#showmodel').modal('show');
-                //alert(modeldishName);
-            };
+               self.selectedMenuItem(data);
+                $('#modelMenuDetails').modal('show');
+               
+             };
 
         };
         MenuViewModel = function(menu) {
@@ -137,11 +171,9 @@
             self.chefName = menu.Chefname;
             self.status = ko.observable(menu.Status);
 
-            var dish = menu.Dishname;
-
-        };
-       // alert(chefname);
-        ko.applyBindings(new customerViewModel(), document.getElementById("customerhome"));
+          };
+      
+        ko.applyBindings(new chefMenuViewModel(), document.getElementById("chefmenu"));
 
 
     </script>

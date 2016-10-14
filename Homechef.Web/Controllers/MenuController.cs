@@ -40,33 +40,33 @@ namespace Homechef.Web.Controllers
                 };
             }
         }
-        public JsonResult ChefMenu(ChefModel chefmodel)
-        {
-            using (var repo = new MenuRepository())
-            {
-                repo.ActiveMenubyChefId(chefmodel.ToDomain().Id);
-                return new JsonResult
-                {
-                    Data = new { IsOk = true }
-                };
-            }
-        }
-        //public ActionResult List()
+        //public JsonResult ChefMenu(ChefModel chefmodel)
         //{
-
-        //    //using (var chefRepo = new ChefRepository())
-        //    //using (var menurepo = new MenuRepository())
-        //    //{
-        //    //    var model = new MenuListModel();
-        //    //    var chef = chefRepo.GetByUser(User);
-        //    //    model.Chef = ChefModel.FromDomain(chef);
-
-        //    //    var menus = menurepo.GetManyMenubyUserId(User.Id);
-        //    //    model.Menus = menus.Select(MenuDisplayModel.FromDomain).ToList();
-        //    //    return View(model);
-        //    //}
-
-            
+        //    using (var repo = new MenuRepository())
+        //    {
+        //        repo.ActiveMenubyChefId(chefmodel.ToDomain().Id);
+        //        return new JsonResult
+        //        {
+        //            Data = new { IsOk = true }
+        //        };
+        //    }
         //}
+        public ActionResult List(int id)
+        {
+                        
+            using (var chefRepo = new ChefRepository())
+            using (var menurepo = new MenuRepository())
+            {
+                var model = new MenuListModel();
+                var chef = chefRepo.GetBychefId(id);
+                model.Chef = ChefModel.FromDomain(chef);
+
+                var menus = menurepo.ActiveMenubyChefId(id);
+                model.Menus = menus.Select(MenuDisplayModel.FromDomain).ToList();
+                return View(model);
+            }
+
+
+        }
     }
 }

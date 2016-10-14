@@ -39,49 +39,48 @@
 
 
     </div>
-    
-        <div class="tab-pane active" id="viewAllMenu">
-            <div class="col-md-12">
-                <div class="col-md-10" style="background-color: lightblue">
-                    <div id="menu" class="row,collapse in" data-bind="foreach: menus">
-                        <div class="col-sm-3 col-md-3" style="position: relative">
-                            <div class="thumbnail text-center">
-                                <div class="caption">
-                                    <p>
-                                        <label> From: </label>
-                                        <span data-bind="text: chefName"> </span>
-                                    </p>
-                                    <span style="position: absolute; top: 80px" class="label label-pill label-success"><span data-bind="text: dishName"></span></span>
 
-                                    <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 100%;" alt="Image">
+    <div class="tab-pane active" id="viewAllMenu">
+        <div class="col-md-12">
+            <div class="col-md-10" style="background-color: lightblue">
+                <div id="menu" class="row,collapse in" data-bind="foreach: menus">
+                    <div class="col-sm-3 col-md-3" style="position: relative">
+                        <div class="thumbnail text-center">
+                            <div class="caption">
+                                <p>
+                                    <label> From: </label>
+                                    <span data-bind="text: chefName"> </span>
+                                </p>
+                                <span style="position: absolute; top: 80px" class="label label-pill label-success"><span data-bind="text: dishName"></span></span>
 
-                                    <div style="height: 50px; width: 100%;margin-top: 3px;">
-                                        <label> Price : </label>
-                                        <span data-bind="text: pricePerPortion+' '+currency"> </span>
-                                    </div>
-                                    <div style="height: 50px; width: 100%; margin-top: 3px;">
-                                        <label> Available : </label>
+                                <img src="http://localhost:52990/Content/Images/Menus/21.jpg" style="width: 100%;" alt="Image">
 
-                                        <span data-bind="text: availabilityType"> </span>
-                                    </div>
-
-                                    <p>
-
-                                    </p>
-                                    @*<p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>*@
-
-                                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind=" click: $parent.viewDetails">View Details</button>
-
-
-
+                                <div style="height: 50px; width: 100%;margin-top: 3px;">
+                                    <label> Price : </label>
+                                    <span data-bind="text: pricePerPortion+' '+currency"> </span>
                                 </div>
+                                <div style="height: 50px; width: 100%; margin-top: 3px;">
+                                    <label> Available : </label>
+
+                                    <span data-bind="text: availabilityType"> </span>
+                                </div>
+
+                                <p>
+
+                                </p>
+                                @*<p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>*@
+
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: $parent.viewDetails">View Details</button>
+
+
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
-
-                </div>
+            </div>
+            <div class="col-md-2"style="background-color:mediumseagreen">
+                <h3>    o   Page</h3>
             </div>
         </div>
 
@@ -167,7 +166,7 @@
     </div>
 
 
-
+</div>
 
 
 @section scripts

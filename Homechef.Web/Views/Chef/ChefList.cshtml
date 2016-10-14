@@ -19,7 +19,7 @@
                     <span data-bind="text: id"> </span>
                 </p>
                 <p>
-                    <a href="#" class="btn btn-primary" role="button" data-bind=" click: viewAllMenus">View Menus</a>
+                    <a href="#" class="btn btn-primary" role="button" data-bind=" click: viewAllMenus">View My Menus</a>
                 </p>
             </div>
         </div>
@@ -49,13 +49,9 @@
             self.city = chef.City;
             self.province = chef.Province;
             self.viewAllMenus = function() {
-                alert(self.chefName);
-                sendViewModelToController("Menu/ChefMenu",
-                    ko.toJSON(self),
-                    function() {
-                        changeLocation("Menu/List", true);
-                    });
-               
+                           
+            changeLocation("Menu/List/" + self.id, true);
+                       
             };
         };
 

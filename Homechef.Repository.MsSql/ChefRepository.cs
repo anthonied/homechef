@@ -44,6 +44,14 @@ namespace Homechef.Repository.MsSql
             var chefData = _db.Query<Chef_data>(sql, new {user.Id}).First();
             return ToDomain(chefData);
         }
+
+        public Chef GetBychefId(int id)
+        {
+            var sql = "SELECT A.*,B.email from chef A,[user] B where A.id = @id AND B.id = A.user_id";
+
+            var chefData = _db.Query<Chef_data>(sql, new { id }).First();
+            return ToDomain(chefData);
+        }
         public void Update(Chef chef)
         {
             var sql = @"UPDATE chef
