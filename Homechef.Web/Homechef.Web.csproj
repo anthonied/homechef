@@ -192,6 +192,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MenuAddModel.cs" />
     <Compile Include="Models\MenuDisplayModel.cs" />
+    <Compile Include="Models\MenuListModel.cs" />
     <Compile Include="Models\MenuStatusUpdateModel.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\ChefUpdateRegistrationModel.cs" />
@@ -202,6 +203,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Chefs\home munch 4.jpg" />
     <Content Include="Content\Images\Menus\1.JPEG" />
     <Content Include="Content\Images\Menus\2.png" />
     <Content Include="Content\Images\Menus\21.jpg" />
@@ -259,6 +261,7 @@
     <Content Include="Views\Chef\UpdateRegistration.cshtml" />
     <Content Include="Views\Customer\UpdateRegistration.cshtml" />
     <Content Include="Views\Chef\ChefList.cshtml" />
+    <Content Include="Views\Menu\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

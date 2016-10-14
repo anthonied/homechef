@@ -35,6 +35,7 @@ namespace Homechef.Web.Models
 
             return new Chef
             {
+                Id =Id,
                 Firstname = Firstname,
                 Lastname=Lastname,
                 Idnumber=Idnumber,

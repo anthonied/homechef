@@ -4,20 +4,20 @@
     <div class="col-sm-3 col-md-3">
         <div class="thumbnail text-center ">
 
-          
+
             <div class="caption">
                 <p>
                     <label>Home Munch Chef</label>
                     <span data-bind="text: chefName"> </span>
                 </p>
                 <span data-bind="text: description"></span>
-                <img src="http://localhost:52990/Content/Images/Menus/21.jpg" alt="Image">
+                <img src="http://localhost:52990/Content/Images/Chefs/home munch 4.jpg" alt="Image">
 
                 <p>
                     <label> Address:</label>
                     <span data-bind="text: city+' '+province"> </span>
                     <span data-bind="text: id"> </span>
-                    </p>
+                </p>
                 <p>
                     <a href="#" class="btn btn-primary" role="button" data-bind=" click: viewAllMenus">View Menus</a>
                 </p>
@@ -50,7 +50,12 @@
             self.province = chef.Province;
             self.viewAllMenus = function() {
                 alert(self.chefName);
-                alert(self.id);
+                sendViewModelToController("Menu/ChefMenu",
+                    ko.toJSON(self),
+                    function() {
+                        changeLocation("Menu/List", true);
+                    });
+               
             };
         };
 

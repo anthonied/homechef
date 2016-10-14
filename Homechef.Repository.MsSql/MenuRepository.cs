@@ -59,7 +59,15 @@ namespace Homechef.Repository.MsSql
             var menuData = _db.Query<Menu_data>(sql).ToList();
             return menuData.Select(ToDomain).ToList();
         }
-
+        public List<Menu> ActiveMenubyChefId(int chefId)
+        {
+            var sql = @"SELECT A.*,B.firstname as chefname FROM menu A,chef B where 
+                        A.status = 'Active'
+                        and A.chef_id=B.id
+                        and A.chef_id =@chefId";
+            var menuData = _db.Query<Menu_data>(sql, new { chefId }).ToList();
+            return menuData.Select(ToDomain).ToList();
+        }
         public Menu ToDomain(Menu_data menudata)
         {
             return new Menu
