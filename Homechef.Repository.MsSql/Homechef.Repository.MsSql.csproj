@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartitemRepository.cs" />
+    <Compile Include="CartRepository.cs" />
     <Compile Include="ChefRepository.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="MenuRepository.cs" />

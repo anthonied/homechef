@@ -27,6 +27,7 @@
                                 <label>About the chef:</label>
                                 <span data-bind="text: description"> </span>
                             </div>
+                            @*<button data-bind="click: submit" class="btn btn-default">Submit</button>*@
                         </div>
                     </div>
                 </div>
@@ -38,7 +39,7 @@
 
     <div class="tab-pane active" id="viewAllMenu">
         <div class="col-md-12">
-            <div class="col-md-10" style="background-color: lightblue">
+            <div class="col-md-8" style="background-color: lightblue">
                 <div id="menu" class="row,collapse in" data-bind="foreach: menus">
                     <div class="col-sm-3 col-md-3" style="position: relative">
                         <div class="thumbnail text-center">
@@ -67,6 +68,7 @@
                                 @*<p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>*@
 
                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: $parent.viewDetails">View Details</button>
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: $parent.addToCart">Add to Cart</button>
 
 
 
@@ -75,11 +77,73 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div id="cart" class="col-md-4" style="background-color:burlywood">
+                
+                <div  style="background-color:aqua">
+                    @* --------------------------------------------------------------*@
+                    <h2>Cart</h2>
+                    <hr />
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th style="width:30px">Qty.</th>
+                                    <th>Menu Item</th>
+                                    <th>Unit Price</th>
+                                    <th style="width:75px">Actions</th>
+                                </tr>
+                                </thead>
 
+                                <tbody data-bind="foreach:SelectedItemToCart">
+
+                                <!-- This HTML within this <tbody></tbody> block will get rendered for each item in view_model.cart -->
+
+                                <tr>
+                                    <td>
+
+                                        <!-- [CartItem] $data.quantity (Observable) -->
+                                        <input style="width:28px" data-bind="value:$parent.quantity" />
+
+                                    </td>
+                                    <td>
+
+                                        <!-- [CartItem] $data.product().name (Observable) -->
+                                        <span data-bind="text:$data.dishName"></span>
+
+                                    </td>
+                                    <td style="text-align:right">
+
+                                        <!-- [CartItem] $data.cost (Computed Observable) -->
+                                        <span data-bind="text:$data.pricePerPortion+' '+currency"></span>
+
+                                    </td>
+                                    <td style="text-align:center">
+
+                                        <!--
+                                        - $parent is a special object used to reach above the scope of the foreach loop we're currently in.
+                                        - Events binding `click:$parent.removeFromCart` executes an Action Method in the View Model
+                                        - Knockout automaticlly passes $data as the first parameter, and the `events` object as the second parameter.
+                                        -->
+                                        <a href="#" class="btn btn-mini btn-danger" data-bind="click:$parent.removeFromCart">
+                                            <i class="icon-remove icon-white"></i> Remove
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    @* ------------------------------------------*@
+                </div>
+                <div style="background-color:gold">
+                    <label>Total</label>
+                </div>
             </div>
         </div>
     </div>
+   
     <div class="modal fade" id="modelMenuDetails" role="dialog">
         <div class="modal-dialog" data-bind="with: selectedMenuItem">
             <!-- Modal content-->
@@ -133,27 +197,58 @@
 {
     <script>
 
-       var model = @Html.Raw(Json.Encode(Model));
-       var chefMenuViewModel = function() {
-           var self = this;
-           self.fullName = ko.observable(model.Chef.Fullname);
-           self.streetName = ko.observable(model.Chef.Streetname);
-           self.suburb = ko.observable(model.Chef.Suburb);
-           self.city = ko.observable(model.Chef.City);
-           self.province = ko.observable(model.Chef.Province);
-           self.country = ko.observable(model.Chef.Country);
-           self.description = ko.observable(model.Chef.Description);
-           self.menus = ko.utils.arrayMap(model.Menus,
-              function(menu) {
+        var model = @Html.Raw(Json.Encode(Model));
+        var chefMenuViewModel = function() {
+            var self = this;
+            self.fullName = ko.observable(model.Chef.Fullname);
+            self.streetName = ko.observable(model.Chef.Streetname);
+            self.suburb = ko.observable(model.Chef.Suburb);
+            self.city = ko.observable(model.Chef.City);
+            self.province = ko.observable(model.Chef.Province);
+            self.country = ko.observable(model.Chef.Country);
+            self.description = ko.observable(model.Chef.Description);
+            self.menus = ko.utils.arrayMap(model.Menus,
+                function(menu) {
                     return new MenuViewModel(menu);
                 });
-
             self.selectedMenuItem = ko.observable();
             self.viewDetails = function(data) {
-               self.selectedMenuItem(data);
+                self.selectedMenuItem(data);
                 $('#modelMenuDetails').modal('show');
-               
-             };
+            }
+
+
+            //----------------
+            //var AddToCartMenu= function(id, name, price) {
+            //            self.id = ko.observable(id);
+            //            self.dishname = ko.observable(dishName);
+            //            self.pricePerPortion = ko.observable(pricePerPortion);
+
+            //};
+            //var CartItem = function(addToCartMenu, quantity) {
+
+
+            //    self.addToCartMenu = ko.observable(addToCartMenu);
+            //            self.quantity = ko.observable(quantity || 1);
+            //            self.cost = ko.computed(function() {
+            //                return self.addToCartMenu().pricePerPortion() * self.quantity();
+            //            });
+            //        }
+                self.quantity = ko.observable(1);
+                self.SelectedItemToCart = ko.observableArray();
+                self.addToCart = function(data) {
+                self.SelectedItemToCart.push(data);
+                
+                var modelData = {id: data.id, customerId: 1}
+                sendViewModelToController("Controller/Action",
+                    ko.toJSON(modelData),
+                    function(response) {
+
+                    });
+            };
+
+
+            //--------------------------------------
 
         };
         MenuViewModel = function(menu) {
@@ -170,11 +265,9 @@
             self.leadTime = menu.Leadtime;
             self.chefName = menu.Chefname;
             self.status = ko.observable(menu.Status);
+        };
 
-          };
-      
         ko.applyBindings(new chefMenuViewModel(), document.getElementById("chefmenu"));
-
-
     </script>
+
 }
