@@ -9,11 +9,12 @@ namespace Homechef.Domain
    public class Cartitem
     {
         public int Id { get; set; }
-        public int Cartid { get; set; }
-        public int Menuid { get; set; }
+        public int Cart_id { get; set; }
+        public int Menu_id { get; set; }
         public int Quantity { get; set; }
-        public int Unitprice { get; set; }
-        public int Totalprice { get; set; }
+        public int Pricepp { get; set; }
+        public int Subtotal { get; set; }
+       public DateTime Lastupdated { get; set; }
 
     }
 }

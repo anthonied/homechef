@@ -173,10 +173,14 @@
     <Compile Include="Authentication\ICustomPrincipal.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ChefController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Models\CartAddModel.cs" />
+    <Compile Include="Models\CartitemAddModel.cs" />
+    <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\ChefListModel.cs" />
     <Compile Include="Models\ChefHomeModel.cs" />
     <Compile Include="Models\CustomerHomeModel.cs" />
@@ -203,6 +207,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Cart\empty-cart.png" />
     <Content Include="Content\Images\Chefs\home munch 4.jpg" />
     <Content Include="Content\Images\Menus\1.JPEG" />
     <Content Include="Content\Images\Menus\2.png" />
@@ -265,6 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

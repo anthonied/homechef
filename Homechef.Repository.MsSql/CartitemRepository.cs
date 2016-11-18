@@ -10,7 +10,7 @@ namespace Homechef.Repository.MsSql
     {
         public void Create(Cartitem cartitem)
         {
-            var sql = @"";
+            var sql = @"INSERT INTO cartitem (cart_id, menu_id,quantity,pricepp,subtotal,lastupdated)  VALUES (@cart_id,@menu_id,@quantity,@pricepp,@subtotal,getdate())";
             var data = Cartitem_data.FromDomain(cartitem);
             _db.Execute(sql, data);
         }
@@ -19,11 +19,12 @@ namespace Homechef.Repository.MsSql
             return new Cartitem
             {
                 Id = cartitemdata.id,
-                Cartid = cartitemdata.cart_id,
-                Menuid = cartitemdata.menu_id,
+                Cart_id = cartitemdata.cart_id,
+                Menu_id = cartitemdata.menu_id,
                 Quantity = cartitemdata.quantity,
-                Unitprice = cartitemdata.unitprice,
-                Totalprice = cartitemdata.totalprice,
+                Pricepp = cartitemdata.pricepp,
+                Subtotal = cartitemdata.subtotal,
+                Lastupdated = cartitemdata.lastupdated,
 
 
              };

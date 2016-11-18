@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Homechef.Domain;
 
 namespace Homechef.Web.Models
 {
@@ -9,5 +8,6 @@ namespace Homechef.Web.Models
     {
         public CustomerModel Customer { get; set; }
         public List<MenuDisplayModel> Menus { get; set; }
+        
     }
 }

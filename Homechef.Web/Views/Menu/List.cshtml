@@ -2,7 +2,7 @@
 
     <div class="panel panel-primary ">
         <div class="panel-heading  panel-info">
-           
+
         </div>
         <div class="panel-body">
             <div class="row">
@@ -54,7 +54,7 @@
 
                                 <div style="height: 50px; width: 100%;margin-top: 3px;">
                                     <label> Price : </label>
-                                    <span data-bind="text: pricePerPortion+' '+currency"> </span>
+                                    <span data-bind="text: pricepp+' '+currency"> </span>
                                 </div>
                                 <div style="height: 50px; width: 100%; margin-top: 3px;">
                                     <label> Available : </label>
@@ -68,7 +68,7 @@
                                 @*<p><a href="#" class="btn btn-primary" role="button" data-bind=" click: viewDetails">View Details</a>*@
 
                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: $parent.viewDetails">View Details</button>
-                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: $parent.addToCart">Add to Cart</button>
+                                <button type="button" id="addToCart" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: $parent.addToCart,enable :isEnabled">Add to Cart</button>
 
 
 
@@ -78,8 +78,8 @@
                 </div>
             </div>
             <div id="cart" class="col-md-4" style="background-color:burlywood">
-                
-                <div  style="background-color:aqua">
+
+                <div style="background-color:aqua">
                     @* --------------------------------------------------------------*@
                     <h2>Cart</h2>
                     <hr />
@@ -87,63 +87,116 @@
                         <div class="span8">
                             <table class="table table-bordered">
                                 <thead>
-                                <tr>
-                                    <th style="width:30px">Qty.</th>
-                                    <th>Menu Item</th>
-                                    <th>Unit Price</th>
-                                    <th style="width:75px">Actions</th>
-                                </tr>
+                                    <tr>
+                                        <th style="width:30px">Qty.</th>
+                                        <th>Menu Item</th>
+                                        <th>Unit Price</th>
+                                        <th>Subtotal </th>
+                                        <th style="width:75px">Actions</th>
+                                    </tr>
                                 </thead>
 
                                 <tbody data-bind="foreach:SelectedItemToCart">
 
-                                <!-- This HTML within this <tbody></tbody> block will get rendered for each item in view_model.cart -->
+                                    <!-- This HTML within this <tbody></tbody> block will get rendered for each item in view_model.cart -->
 
-                                <tr>
-                                    <td>
+                                    <tr>
+                                        <td>
 
-                                        <!-- [CartItem] $data.quantity (Observable) -->
-                                        <input style="width:28px" data-bind="value:$parent.quantity" />
+                                            <!-- [CartItem] $data.quantity (Observable) -->
+                                            <input id="quantity" style="width:28px" data-bind="value:quantity" />
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                        <!-- [CartItem] $data.product().name (Observable) -->
-                                        <span data-bind="text:$data.dishName"></span>
+                                            <!-- [CartItem] $data.product().name (Observable) -->
+                                            <span data-bind="text:dishName"></span>
 
-                                    </td>
-                                    <td style="text-align:right">
+                                        </td>
+                                        <td style="text-align:right">
 
-                                        <!-- [CartItem] $data.cost (Computed Observable) -->
-                                        <span data-bind="text:$data.pricePerPortion+' '+currency"></span>
+                                            <!-- [CartItem] $data.cost (Computed Observable) -->
+                                            <span data-bind="text:pricepp+' '+currency"></span>
 
-                                    </td>
-                                    <td style="text-align:center">
+                                        </td>
+                                        <td style="text-align:right">
 
-                                        <!--
-                                        - $parent is a special object used to reach above the scope of the foreach loop we're currently in.
-                                        - Events binding `click:$parent.removeFromCart` executes an Action Method in the View Model
-                                        - Knockout automaticlly passes $data as the first parameter, and the `events` object as the second parameter.
-                                        -->
-                                        <a href="#" class="btn btn-mini btn-danger" data-bind="click:$parent.removeFromCart">
-                                            <i class="icon-remove icon-white"></i> Remove
-                                        </a>
+                                            <!-- [CartItem] Computed Observable) -->
+                                            <span id="subtotal" data-bind="text:subTotal"></span>
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td style="text-align:center">
+
+                                            <!--
+                                            - $parent is a special object used to reach above the scope of the foreach loop we're currently in.
+                                            - Events binding `click:$parent.removeFromCart` executes an Action Method in the View Model
+                                            - Knockout automaticlly passes $data as the first parameter, and the `events` object as the second parameter.
+                                            -->
+                                            <a href="#" class="btn btn-mini btn-danger" data-bind="click:$parent.removeFromCart">
+                                                <i class="icon-remove icon-white"></i> Remove
+                                            </a>
+
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     @* ------------------------------------------*@
                 </div>
+                <div id="emptyCart" style="background-color: white">
+                    <div class="span4" style="text-align: left">
+
+                    </div>
+                    <strong>
+                        Your Order Request
+                    </strong>
+                    <div style="text-align: center">
+                        <img src="http://localhost:52990/Content/Images/Cart/empty-cart.png" alt="Image">
+                    </div>
+
+                    <div style="text-align: center">Your cart is empty</div>
+                    <div style="text-align: center">Add an Item to begin......</div>
+                </div> 
                 <div style="background-color:gold">
-                    <label>Total</label>
+                    <div class="span4">
+                        <table class="table table-bordered">
+                            <tbody>
+
+
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td style="text-align:right">
+
+                                        <!-- [ViewModel] view_model.cost (Computed Observable) -->
+                                        <strong><span data-bind="text:total"></span></strong>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="background-color:white">
+                    <div class="span4">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+
+                                    <td style="text-align:right">
+
+                                        <button type="button" id="goToNextStep" class="btn btn-info btn-lg" data-toggle="modal" data-bind="click: goToNextStep">Go To Next Step</button>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-   
+
     <div class="modal fade" id="modelMenuDetails" role="dialog">
         <div class="modal-dialog" data-bind="with: selectedMenuItem">
             <!-- Modal content-->
@@ -158,7 +211,7 @@
                             <div class="col-md-5" style="background-color: lightsteelblue">
                                 <label>Dish Category :</label><span data-bind="text:dishCategory"> </span>
                                 <div>
-                                    <label>Price : </label><span data-bind="text: pricePerPortion+' '+currency"> </span>
+                                    <label>Price : </label><span data-bind="text: pricepp+' '+currency"> </span>
                                 </div>
                                 <div>
                                     <label>Available : </label><span data-bind="text: availabilityType"> </span>
@@ -218,45 +271,86 @@
             }
 
 
-            //----------------
-            //var AddToCartMenu= function(id, name, price) {
-            //            self.id = ko.observable(id);
-            //            self.dishname = ko.observable(dishName);
-            //            self.pricePerPortion = ko.observable(pricePerPortion);
+            self.SelectedItemToCart = ko.observableArray();
+            self.SelectedItemToCart.subscribe(function(){
+                self.menus.forEach(function(menu){
+                    menu.isEnabled(true);
+                    self.SelectedItemToCart().forEach(function(cartItem){
+                        if (cartItem.menuId === menu.id){
+                            menu.isEnabled(false)
+                        };
+                    });
+                })
+            });
+            self.addToCart = function(data) {
+                self.SelectedItemToCart.push(new cartItemViewModel(data));
+                    if (self.SelectedItemToCart().length == 0) {
+                    document.getElementById("goToNextStep").disabled = true;
+                    document.getElementById("emptyCart").style.display = 'block';
 
-            //};
-            //var CartItem = function(addToCartMenu, quantity) {
+                      } else {
+                    document.getElementById("goToNextStep").disabled = false;
+                    document.getElementById("emptyCart").style.display = 'none';
+                }
 
+            }
 
-            //    self.addToCartMenu = ko.observable(addToCartMenu);
-            //            self.quantity = ko.observable(quantity || 1);
-            //            self.cost = ko.computed(function() {
-            //                return self.addToCartMenu().pricePerPortion() * self.quantity();
-            //            });
-            //        }
-                self.quantity = ko.observable(1);
-                self.SelectedItemToCart = ko.observableArray();
-                self.addToCart = function(data) {
-                self.SelectedItemToCart.push(data);
-                
-                var modelData = {id: data.id, customerId: 1}
-                sendViewModelToController("Controller/Action",
-                    ko.toJSON(modelData),
-                    function(response) {
+            self.removeFromCart = function(data) {
+                self.SelectedItemToCart.remove(data);
+if (self.SelectedItemToCart().length == 0) {
+                    document.getElementById("goToNextStep").disabled = true;
+                    document.getElementById("emptyCart").style.display = 'block';
+
+                } else {
+                    document.getElementById("goToNextStep").disabled = false;
+                    document.getElementById("emptyCart").style.display = 'none';
+                }
+
+            }
+
+            self.total = ko.computed(function() {
+                var total = 0;
+                self.SelectedItemToCart()
+                    .forEach(function(item) {
+                        total += item.subTotal();
+                    });
+
+                return total;
+            });
+
+            self.goToNextStep = function() {
+                sendViewModelToController("Cart/Add",
+                    ko.toJSON(new cartViewModel(self)),
+                    function() {
+                        alert("Done");
+                        // changeLocation("", true);
+
 
                     });
-            };
-
-
-            //--------------------------------------
+            }
 
         };
+
+        var cartItemViewModel = function(item) {
+            var self = this;
+
+            self.menuId = item.id;
+            self.dishName = item.dishName;
+            self.pricepp = item.pricepp;
+            self.currency = item.currency;
+            self.quantity = ko.observable(1);
+            self.subTotal = ko.computed(function() {
+                return self.quantity() * self.pricepp;
+            });
+        };
+
+
         MenuViewModel = function(menu) {
             var self = this;
             self.id = menu.Id;
             self.dishName = menu.Dishname;
             self.dishCategory = menu.Dishcategory;
-            self.pricePerPortion = menu.Pricepp;
+            self.pricepp = menu.Pricepp;
             self.currency = menu.Currency;
             self.takeAway = menu.Takeaway;
             self.dineInWithChef = menu.Dineinwithchef;
@@ -265,9 +359,35 @@
             self.leadTime = menu.Leadtime;
             self.chefName = menu.Chefname;
             self.status = ko.observable(menu.Status);
+            self.isEnabled = ko.observable(true);
+
         };
+
+        var cartViewModel = function(viewModel) {
+            var self = this;
+
+            self.cartAdd = new cartAddViewModel(model.Chef.Id, viewModel.total);
+            self.cartItems = ko.utils.arrayMap(viewModel.SelectedItemToCart(),
+                function(item) { return new cartitemAddViewModel(item); });
+        };
+
+        var cartAddViewModel = function(Id, total) {
+            var self = this;
+            self.chefid = Id;
+            self.total = total;
+        };
+
+        var cartitemAddViewModel = function(cartItem) {
+            var self = this;
+            self.menu_id = cartItem.menuId;
+            self.quantity = cartItem.quantity;
+            self.pricepp = cartItem.pricepp;
+            self.subTotal = cartItem.subTotal();
+        };
+
 
         ko.applyBindings(new chefMenuViewModel(), document.getElementById("chefmenu"));
     </script>
 
 }
+

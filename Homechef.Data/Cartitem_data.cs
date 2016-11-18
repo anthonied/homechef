@@ -9,19 +9,21 @@ namespace Homechef.Data
         public int cart_id { get; set; }
         public int menu_id { get; set; }
         public int quantity { get; set; }
-        public int unitprice { get; set; }
-        public int totalprice { get; set; }
+        public int pricepp { get; set; }
+        public int subtotal { get; set; }
+        public DateTime lastupdated { get; set; }
 
         public static Cartitem_data FromDomain(Cartitem cartitem)
         {
             return new Cartitem_data
             {
                 id = cartitem.Id,
-                cart_id = cartitem.Cartid,
-                menu_id = cartitem.Menuid,
+                cart_id = cartitem.Cart_id,
+                menu_id = cartitem.Menu_id,
                 quantity = cartitem.Quantity,
-                unitprice = cartitem.Unitprice,
-                totalprice = cartitem.Unitprice,
+                pricepp = cartitem.Pricepp,
+                subtotal= cartitem.Subtotal,
+                lastupdated = cartitem.Lastupdated,
 
             };
         }

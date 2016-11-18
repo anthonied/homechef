@@ -9,8 +9,11 @@ namespace Homechef.Domain
    public class Cart
     {
         public int Id { get; set; }
-        public int Customerid { get; set; }
-        public int Chefid { get; set; }
+        public int Customer_id { get; set; }
+        public int Chef_id { get; set; }
+        public DateTime Orderdate { get; set; }
+        public int Total { get; set; }
+        public string Status { get; set; }
        
     }
 }
